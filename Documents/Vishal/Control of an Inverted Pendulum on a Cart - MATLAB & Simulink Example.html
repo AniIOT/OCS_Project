@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<!-- saved from url=(0088)https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Control of an Inverted Pendulum on a Cart
+- MATLAB &amp; Simulink Example</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="canonical" href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html">
+<iframe src="javascript:void(0)" title="" role="presentation" id="df-a4271557-90cb-4a35-ba2a-a61fc5e00b18" style="width: 0px; height: 0px; border: 0px; display: none;" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/saved_resource.html"></iframe><script async="" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/qevents.js.download"></script><script type="text/javascript" async="" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/insight.min.js.download"></script><script async="" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/uwt.js.download"></script><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/quant.js.download" async="" type="text/javascript"></script><script async="" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/fbevents.js.download"></script><script type="text/javascript" async="" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ahy.js.download"></script><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/rules-p-zfNtLVVEHXE-1.js.download" async=""></script><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/quant.js.download" async="" type="text/javascript"></script><script async="" type="text/javascript" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/cmp2.js.download"></script><script type="text/javascript" async="" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/elqCfg.min.js.download"></script><script async="" type="text/javascript" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/choice.js.download"></script><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/webvitals.min.20220801024749208.js.download"></script><link rel="stylesheet" href="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/common.min.20220801024749208.css" type="text/css">
+<link rel="stylesheet" href="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/footer.min.20220801024749208.css" type="text/css">
+<link href="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/site6_offcanvas_v2.css" rel="stylesheet" type="text/css">
+<!-- CRUX 2.0 -->
+<link href="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/site7_crux.css" rel="stylesheet" type="text/css">
+<script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/jquery-1.12.4.min.js.download"></script>
+<script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/bootstrap.min.js.download"></script>
+<script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/global.js.download"></script>
+<script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/webvitals.min.20220801024749208.js.download"></script>
+<!-- BEGIN Adobe DTM -->
+<script>(function(g,b,d,f){(function(a,c,d){if(a){var e=b.createElement("style");e.id=c;e.innerHTML=d;a.appendChild(e)}})(b.getElementsByTagName("head")[0],"at-body-style",d);setTimeout(function(){var a=b.getElementsByTagName("head")[0];if(a){var c=b.getElementById("at-body-style");c&&a.removeChild(c)}},f)})(window,document,"[class*='personalization-container']:not([id^='web-application']) {opacity: 0 !important}",2E3);</script>
+<script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/satelliteLib-e8d23c2e444abadc572df06537e2def59c01db09.js.download" async=""></script>
+<!-- END Adobe DTM -->
+<link href="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/doc_center.css" rel="stylesheet" type="text/css">
+<link href="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/doc_center_print.css" rel="stylesheet" type="text/css" media="print">
+<script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/matlab_dialog.js.download"></script>
+<script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/livecontrolpopoverhandler.js.download"></script>
+<script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/livetaskpopoverhandler.js.download"></script>
+<script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/openwith.js.download"></script>
+<style>
+.examples_short_list a.btn {display: none;}
+</style>
+<script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/openInMO.js.download"></script>
+<script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/webvitals.min.20220801024749208.js.download"></script> <link href="https://www.mathworks.com/etc.clientlibs/mathworks/clientlibs/customer-ui/templates/common/resources/fonts/roboto/roboto-latin-italic-400.20220801024749208.woff2" rel="preload" as="font" type="font/woff2" crossorigin="">
+<link href="https://www.mathworks.com/etc.clientlibs/mathworks/clientlibs/customer-ui/templates/common/resources/fonts/roboto/roboto-latin-italic-500.20220801024749208.woff2" rel="preload" as="font" type="font/woff2" crossorigin="">
+<link href="https://www.mathworks.com/etc.clientlibs/mathworks/clientlibs/customer-ui/templates/common/resources/fonts/roboto/roboto-latin-italic-700.20220801024749208.woff2" rel="preload" as="font" type="font/woff2" crossorigin="">
+<link href="https://www.mathworks.com/etc.clientlibs/mathworks/clientlibs/customer-ui/templates/common/resources/fonts/roboto/roboto-latin-normal-400.20220801024749208.woff2" rel="preload" as="font" type="font/woff2" crossorigin="">
+<link href="https://www.mathworks.com/etc.clientlibs/mathworks/clientlibs/customer-ui/templates/common/resources/fonts/roboto/roboto-latin-normal-500.20220801024749208.woff2" rel="preload" as="font" type="font/woff2" crossorigin="">
+<link href="https://www.mathworks.com/etc.clientlibs/mathworks/clientlibs/customer-ui/templates/common/resources/fonts/roboto/roboto-latin-normal-700.20220801024749208.woff2" rel="preload" as="font" type="font/woff2" crossorigin="">
+<link href="https://www.mathworks.com/etc.clientlibs/mathworks/clientlibs/customer-ui/templates/common/resources/fonts/mathworks.20220801024749208.woff" rel="preload" as="font" type="font/woff" crossorigin="">
+<script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+{
+"@context": "http://schema.org",
+"@type": "BreadcrumbList",
+"itemListElement":
+[{
+"@type": "ListItem",
+"position": 1,
+"item": {
+"@id": "../index.html",
+"name": "Control System Toolbox"
+}
+}
+,
+{
+"@type": "ListItem",
+"position": 2,
+"item": {
+"@id": "../control-design.html",
+"name": "Control System Design and Tuning"
+}
+}
+,
+{
+"@type": "ListItem",
+"position": 3,
+"item": {
+"@id": "../control-system-tuning.html",
+"name": "Multiloop, Multiobjective Tuning"
+}
+}
+,
+{
+"@type": "ListItem",
+"position": 4,
+"item": {
+"@id": "../programmatic-control-system-tuning.html",
+"name": "Programmatic Tuning"
+}
+}
+,
+{
+"@type": "ListItem",
+"position": 5,
+"item": {
+"@id": "../tuning-1.html",
+"name": "Tuning, Analysis, and Validation"
+}
+}]
+}</script><script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+{
+"@context": "http://schema.org",
+"@type": "ItemList",
+"name": "VisibleBreadcrumbs",
+"itemListElement":
+[
+"tuning-1"
+],
+"itemListOrder": "http://schema.org/ItemListOrderAscending"
+}
+</script><script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+{
+"@context": "http://schema.org",
+"@type": "DigitalDocument",
+"headline": "Control of an Inverted Pendulum on a Cart",
+"description": "Uses systune to control an inverted pendulum on a cart.",
+"thumbnailURL": "../../examples/control/win64/pendulum1.png",
+"genre": "Script",
+"isBasedOn": {
+"@type": "Product",
+"name": "Simulink"
+},
+"identifier": "control.InvertedPendulumExample",
+"name": "InvertedPendulumExample",
+"url": "control-of-an-inverted-pendulum-on-a-cart.html"
+}</script><script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+{
+"@context": "http://schema.org",
+"@type": "PropertyValue",
+"name": "open_command",
+"value": "matlab:openExample('control/InvertedPendulumExample')"
+}</script><script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+{
+"@context": "http://schema.org",
+"@type": "ItemList",
+"name": "ExampleSourceFiles",
+"itemListElement":
+[
+"InvertedPendulumExample.m",
+"pendulum1.png",
+"pendulum2.png",
+"pendulum3.gif",
+"rct_pendulum.slx"
+],
+"itemListOrder": "http://schema.org/ItemListOrderAscending"
+}
+</script>
+<meta xmlns="http://www.w3.org/1999/xhtml" http-equiv="Content-Script-Type" content="text/javascript">
+<meta xmlns="http://www.w3.org/1999/xhtml" name="toctype" itemprop="pagetype" content="fe">
+<meta xmlns="http://www.w3.org/1999/xhtml" name="infotype" itemprop="infotype" content="ex">
+<meta xmlns="http://www.w3.org/1999/xhtml" name="description" itemprop="description" content="This example uses systune to control an inverted pendulum on a cart."><meta xmlns="http://www.w3.org/1999/xhtml" content="../../examples/control/win64/pendulum1.png" itemprop="thumbnailUrl">
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/l10n.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/docscripts.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/f1help.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/mw.toc_2.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/mw.imagescaling.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/mw.imageanimation.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/mw.breadcrumb.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/jquery.highlight.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/underscore-min.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/doc_omniture.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/overload.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/helpservices.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/productfilter.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/product_group.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/SaxonJS2.rt.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml">
+window.history.replaceState(window.location.href, null, ""); // Initialize
+window.onload = function() {
+mystylesheetLocation = "/help/releases/R2022b/includes/shared/scripts/product_group-sef.json";
+mysourceLocation = "/help/releases/R2022b/docset.xml";
+product_help_location = "control";
+pagetype = "section";
+doccentertype = "web";
+langcode = "";
+getProductFilteredList(mystylesheetLocation, mysourceLocation, product_help_location, pagetype, doccentertype, langcode);
+}
+</script>
+<!-- Additions/overrides from the doc side -->
+<style>
+.typeahead_container.typeahead_type_grouped { margin-left:0; }
+@media (min-width:768px) {
+#suggestions { margin-left:-100px }
+}
+</style>
+<script type="text/javascript" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/helpcenter_docsearch.js.download"></script>
+<script type="text/javascript" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/jquery.toggleval.js.download"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/MathRenderer.js.download"></script><style type="text/css">math { visibility: hidden; }</style><link type="text/css" rel="stylesheet" href="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/index-css.css"><script type="text/javascript" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/bundle.index.js.download"></script>
+<script type="text/javascript" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/jquery.cookie.js.download"></script>
+<script type="text/javascript" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/akamai-country-code.js.download"></script>
+<script type="text/javascript">
+var domainCountryCodeMap = new Map();
+var countryCodeToDomainMap = new Map();
+domainCountryCodeMap.set('www.mathworks.com', 'www');
+countryCodeToDomainMap.set('www','www.mathworks.com')
+domainCountryCodeMap.set('www.mathworks.com', 'www');
+countryCodeToDomainMap.set('www','www.mathworks.com')
+domainCountryCodeMap.set('la.mathworks.com', 'la');
+countryCodeToDomainMap.set('la','la.mathworks.com')
+domainCountryCodeMap.set('au.mathworks.com', 'au');
+countryCodeToDomainMap.set('au','au.mathworks.com')
+domainCountryCodeMap.set('de.mathworks.com', 'de');
+countryCodeToDomainMap.set('de','de.mathworks.com')
+domainCountryCodeMap.set('nl.mathworks.com', 'nl');
+countryCodeToDomainMap.set('nl','nl.mathworks.com')
+domainCountryCodeMap.set('ww2.mathworks.cn', 'ww2');
+countryCodeToDomainMap.set('ww2','ww2.mathworks.cn')
+domainCountryCodeMap.set('se.mathworks.com', 'se');
+countryCodeToDomainMap.set('se','se.mathworks.com')
+domainCountryCodeMap.set('se.mathworks.com', 'se');
+countryCodeToDomainMap.set('se','se.mathworks.com')
+domainCountryCodeMap.set('fr.mathworks.com', 'fr');
+countryCodeToDomainMap.set('fr','fr.mathworks.com')
+domainCountryCodeMap.set('de.mathworks.com', 'de');
+countryCodeToDomainMap.set('de','de.mathworks.com')
+domainCountryCodeMap.set('in.mathworks.com', 'in');
+countryCodeToDomainMap.set('in','in.mathworks.com')
+domainCountryCodeMap.set('uk.mathworks.com', 'uk');
+countryCodeToDomainMap.set('uk','uk.mathworks.com')
+domainCountryCodeMap.set('it.mathworks.com', 'it');
+countryCodeToDomainMap.set('it','it.mathworks.com')
+domainCountryCodeMap.set('jp.mathworks.com', 'jp');
+countryCodeToDomainMap.set('jp','jp.mathworks.com')
+domainCountryCodeMap.set('kr.mathworks.com', 'kr');
+countryCodeToDomainMap.set('kr','kr.mathworks.com')
+domainCountryCodeMap.set('nl.mathworks.com', 'nl');
+countryCodeToDomainMap.set('nl','nl.mathworks.com')
+domainCountryCodeMap.set('nl.mathworks.com', 'nl');
+countryCodeToDomainMap.set('nl','nl.mathworks.com')
+domainCountryCodeMap.set('au.mathworks.com', 'au');
+countryCodeToDomainMap.set('au','au.mathworks.com')
+domainCountryCodeMap.set('se.mathworks.com', 'se');
+countryCodeToDomainMap.set('se','se.mathworks.com')
+domainCountryCodeMap.set('www.mathworks.com', 'www');
+countryCodeToDomainMap.set('www','www.mathworks.com')
+domainCountryCodeMap.set('es.mathworks.com', 'es');
+countryCodeToDomainMap.set('es','es.mathworks.com')
+domainCountryCodeMap.set('se.mathworks.com', 'se');
+countryCodeToDomainMap.set('se','se.mathworks.com')
+domainCountryCodeMap.set('ch.mathworks.com', 'ch');
+countryCodeToDomainMap.set('ch','ch.mathworks.com')
+domainCountryCodeMap.set('uk.mathworks.com', 'uk');
+countryCodeToDomainMap.set('uk','uk.mathworks.com')
+var countrySubdomains = {
+US: {name: 'United States', subdomain: 'www'},
+AD: {name: 'Andorra', subdomain: 'es'},
+AR: {name: 'Argentina', subdomain: 'la'},
+AU: {name: 'Australia', subdomain: 'au'},
+AT: {name: 'Austria', subdomain: 'de'},
+BE: {name: 'Belgium', subdomain: 'nl'},
+BO: {name: 'Bolivia', subdomain: 'la'},
+BV: {name: 'Bouvet Islands', subdomain: 'se'},
+CA: {name: 'Canada', subdomain: 'www'},
+CL: {name: 'Chile', subdomain: 'la'},
+CN: {name: 'China', subdomain: 'cn'},
+CX: {name: 'Christmas Island', subdomain: 'au'},
+CC: {name: 'Cocos-Keeling Islands', subdomain: 'au'},
+CO: {name: 'Colombia', subdomain: 'la'},
+CR: {name: 'Costa Rica', subdomain: 'la'},
+DK: {name: 'Denmark', subdomain: 'se'},
+DO: {name: 'Dominican Republic', subdomain: 'la'},
+EC: {name: 'Ecuador', subdomain: 'la'},
+SV: {name: 'El Salvador', subdomain: 'la'},
+EE: {name: 'Estonia', subdomain: 'se'},
+FO: {name: 'Faroe Islands', subdomain: 'se'},
+FJ: {name: 'Fiji', subdomain: 'au'},
+FI: {name: 'Finland', subdomain: 'se'},
+FR: {name: 'France', subdomain: 'fr'},
+GF: {name: 'French Guiana', subdomain: 'fr'},
+PF: {name: 'French Polynesia', subdomain: 'fr'},
+DE: {name: 'Germany', subdomain: 'de'},
+GL: {name: 'Greenland', subdomain: 'se'},
+GP: {name: 'Guadalupe', subdomain: 'fr'},
+GT: {name: 'Guatemala', subdomain: 'la'},
+HN: {name: 'Honduras', subdomain: 'la'},
+HK: {name: 'Hong Kong', subdomain: 'cn'},
+IS: {name: 'Iceland', subdomain: 'se'},
+IN: {name: 'India', subdomain: 'in'},
+IE: {name: 'Ireland', subdomain: 'uk'},
+IT: {name: 'Italy', subdomain: 'it'},
+JP: {name: 'Japan', subdomain: 'jp'},
+KR: {name: 'Korea', subdomain: 'kr'},
+LV: {name: 'Latvia', subdomain: 'se'},
+LI: {name: 'Liechtenstein', subdomain: 'ch'},
+LT: {name: 'Lithuania', subdomain: 'se'},
+LU: {name: 'Luxembourg', subdomain: 'nl'},
+MO: {name: 'Macau', subdomain: 'cn'},
+MQ: {name: 'Martinique', subdomain: 'fr'},
+YT: {name: 'Mayotte Island', subdomain: 'fr'},
+MX: {name: 'Mexico', subdomain: 'la'},
+MC: {name: 'Monaco', subdomain: 'fr'},
+NL: {name: 'Netherlands', subdomain: 'nl'},
+NC: {name: 'New Caledonia', subdomain: 'fr'},
+NZ: {name: 'New Zealand', subdomain: 'au'},
+NI: {name: 'Nicaragua', subdomain: 'la'},
+NO: {name: 'Norway', subdomain: 'se'},
+PA: {name: 'Panama', subdomain: 'la'},
+PG: {name: 'Papua New Guinea', subdomain: 'au'},
+PY: {name: 'Paraguay', subdomain: 'la'},
+PE: {name: 'Peru', subdomain: 'la'},
+PT: {name: 'Portugal', subdomain: 'www'},
+PR: {name: 'Puerto Rico', subdomain: 'la'},
+RE: {name: 'Reunion Island', subdomain: 'fr'},
+ES: {name: 'Spain', subdomain: 'es'},
+LK: {name: 'Sri Lanka', subdomain: 'in'},
+SE: {name: 'Sweden', subdomain: 'se'},
+CH: {name: 'Switzerland', subdomain: 'ch'},
+GB: {name: 'United Kingdom', subdomain: 'uk'},
+UY: {name: 'Uruguay', subdomain: 'la'},
+VA: {name: 'Vatican City', subdomain: 'it'},
+VE: {name: 'Venezuela', subdomain: 'la'},
+};
+var domainUtils = {
+isExemptUrl: function (url) {
+if(window.overrideDomainSelector){
+return true;
+}
+var exemptions = [
+'/api/parts/',
+'nocookie=true',
+'client=addons',
+'requestedDomain'
+];
+return exemptions.some(function (exemption) {
+return url.indexOf(exemption) != -1;
+});
+},
+endsWith: function( str, suffix ) {
+return str.substring( str.length - suffix.length, str.length ) === suffix;
+},
+getDomain: function (url) {
+var segments = url.split('/');
+return segments[2];
+},
+getSubdomain: function (domain) {
+return domainCountryCodeMap.get(domain);
+},
+setCookies: function (domain, lang) {
+var domainCookie = 'mathworks.com';
+if (this.endsWith(location.host, 'mathworks.cn')) {
+domainCookie = 'mathworks.cn';
+}
+var selectedSubdomain = this.getSubdomain(domain);
+if (this.endsWith(domain, 'mathworks.cn')) {
+selectedSubdomain = 'cn';
+}
+if (selectedSubdomain === 'www') {
+// This is what ePS did in EQUUS and Ruby, so...
+// we're just following suit.
+selectedSubdomain = 'us';
+}
+if (selectedSubdomain !== 'cn' && selectedSubdomain !== 'ch') {
+lang = '';
+}
+var cookieNames = this.getCookieNames(domain);
+var expires = new Date();
+expires.setFullYear(expires.getFullYear() + 68);
+var myJSON = JSON.stringify({
+domain: selectedSubdomain,
+lang: lang,
+v: 2
+});
+$.cookie(cookieNames.mwaPrefsCookieName, myJSON, {path: '/', expires: 20*365, domain: domainCookie});
+},
+getCookieNames: function (domain) {
+var mwaLoginCookieName = 'mwa';
+var mwaPrefsCookieName = 'mwa_prefs';
+var subdomainSuffix = '';
+if (subdomainSuffix != "") {
+mwaLoginCookieName = mwaLoginCookieName + subdomainSuffix;
+mwaPrefsCookieName = mwaPrefsCookieName + subdomainSuffix;
+}
+return {
+mwaLoginCookieName: mwaLoginCookieName,
+mwaPrefsCookieName: mwaPrefsCookieName,
+};
+},
+switchDomain: function (targetDomain, targetLang) {
+var targetUri = location.pathname;
+targetLang = this.getValidLang(this.getSubdomain(targetDomain), targetLang);
+var url = '//' + targetDomain;
+url += targetUri + location.search;
+url = url.replace(/requestedDomain=[a-z]?[a-z]?&?/, '');
+url = url.replace(/\&$/, '');
+url = url.replace(/\?$/, '');
+var requestedDomainParam = 'requestedDomain=' + targetLang;
+if (url.indexOf('?') > -1) {
+url = url + '&' + requestedDomainParam;
+} else {
+url = url + '?' + requestedDomainParam;
+}
+window.location = url;
+},
+getPrefCookie: function(currentDomain) {
+var cookieNames = this.getCookieNames(currentDomain);
+// regex from: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
+var cookieRegex = new RegExp("(?:(?:^|.*;\\s*)"+cookieNames.mwaPrefsCookieName+"\\s*\\=\\s*([^;]*).*$)|^.*$");
+if (document.cookie) {
+var cookieValue = document.cookie.replace(cookieRegex, "$1");
+if (cookieValue) {
+return JSON.parse(decodeURIComponent(cookieValue));
+}
+}
+return "";
+},
+getPrefDomain: function (currentDomain) {
+var mwaPrefsCookieJsonObject = this.getPrefCookie(currentDomain);
+var visitorPrefDomain;
+if (!!mwaPrefsCookieJsonObject) {
+visitorPrefDomain = mwaPrefsCookieJsonObject.domain;
+if (visitorPrefDomain === 'us') {
+visitorPrefDomain = 'www';
+}else if (visitorPrefDomain === 'cn') {
+visitorPrefDomain = 'ww2';
+}
+}
+return countryCodeToDomainMap.get(visitorPrefDomain);
+},
+getPrefLang: function (currentDomain) {
+var mwaPrefsCookieJsonObject = this.getPrefCookie(currentDomain);
+var multilingualDomainLanguageSupport = {};
+multilingualDomainLanguageSupport['ch'] = ['en','de','fr'];
+multilingualDomainLanguageSupport['cn'] = ['zh','en'];
+var currentDomainLangOptions = multilingualDomainLanguageSupport[mwaPrefsCookieJsonObject.domain];
+if (currentDomainLangOptions) {
+var cookiePrefLang = mwaPrefsCookieJsonObject.lang;
+if (currentDomainLangOptions.indexOf(cookiePrefLang) >= 0) {
+return cookiePrefLang;
+} else {
+return currentDomainLangOptions[0];
+}
+}
+return '';
+},
+getCookieVersion: function (currentDomain) {
+var mwaPrefsCookieJsonObject = this.getPrefCookie(currentDomain);
+return mwaPrefsCookieJsonObject.v;
+},
+getTargetDomainForCookies: function() {
+var targetDomain = "";
+if (this.endsWith(location.host, 'mathworks.cn')) {
+targetDomain = window.location.protocol + "//" + countryCodeToDomainMap.get('www');
+}else{
+targetDomain = window.location.protocol + "//" + countryCodeToDomainMap.get('ww2');
+}
+return targetDomain;
+},
+getValidLang: function (subdomain, lang) {
+var multilingualDomainLanguageSupport = {};
+multilingualDomainLanguageSupport['ch'] = ['en','de','fr'];
+multilingualDomainLanguageSupport['cn'] = ['zh','en'];
+multilingualDomainLanguageSupport['ww2'] = ['zh','en'];
+var currentDomainLangOptions = multilingualDomainLanguageSupport[subdomain];
+if (currentDomainLangOptions) {
+if (currentDomainLangOptions.indexOf(lang) >= 0) {
+return lang;
+} else {
+return currentDomainLangOptions[0];
+}
+}
+return '';
+},
+isDefaultLang: function (subdomain, lang) {
+var multilingualDomainLanguageDefault = {};
+multilingualDomainLanguageDefault['ch'] = 'en';
+multilingualDomainLanguageDefault['cn'] = 'zh';
+multilingualDomainLanguageDefault['ww2'] = 'zh';
+var currentDomainLang = multilingualDomainLanguageDefault[subdomain];
+if (currentDomainLang) {
+if (currentDomainLang === lang) {
+return true;
+} else {
+return false;
+}
+} else if (lang) {
+return false;
+}
+return true;
+}
+};
+$(window).on('load', function() {
+var currentUrl = window.location.href;
+var currentDomain = domainUtils.getDomain(currentUrl);
+var currentSubdomain = domainUtils.getSubdomain(currentDomain);
+var requestedDomainLangRegEx = RegExp('[?&]requestedDomain=([^&]*)').exec(window.location.search);
+if (requestedDomainLangRegEx) {
+var setLang = domainUtils.getValidLang(currentSubdomain, requestedDomainLangRegEx[1])
+domainUtils.setCookies(currentDomain, setLang);
+var URLWithoutRequestedDomain = window.location.href.replace(/requestedDomain=[a-z]?[a-z]?&?/, '');
+URLWithoutRequestedDomain = URLWithoutRequestedDomain.replace(/\&$/, '');
+URLWithoutRequestedDomain = URLWithoutRequestedDomain.replace(/\?$/, '');
+history.replaceState({}, document.title, URLWithoutRequestedDomain);
+window.location = URLWithoutRequestedDomain;
+}
+$('body').on('click', '.domain_selector_link', function (e) {
+e.preventDefault();
+var selectedDomain = domainUtils.getDomain(this.href);
+var selectedLang = $(this).data('lang');
+domainUtils.setCookies(selectedDomain, selectedLang);
+domainUtils.switchDomain(selectedDomain, selectedLang);
+});
+var currentCountryText =
+$('a[data-subdomain=\'' + currentSubdomain + '\'][data-default-lang=\'true\'][data-selected-text]')
+.data('selected-text');
+$('#countrySelectorButtonText').text(currentCountryText);
+var visitorPrefDomain = domainUtils.getPrefDomain(currentDomain);
+var visitorPrefLang = domainUtils.getPrefLang(currentDomain);
+var akamaiCountryCode;
+var akamaiprofile = CQ_Analytics.ClientContextMgr.getRegisteredStore('akamaiprofile');
+if (akamaiprofile) {
+akamaiCountryCode = akamaiprofile.getProperty('countryCode');
+}
+var recommendedSubdomain;
+var recommendedLink;
+if (akamaiCountryCode) {
+if (countrySubdomains[akamaiCountryCode] !== undefined) {
+recommendedSubdomain = countrySubdomains[akamaiCountryCode].subdomain;
+} else {
+recommendedSubdomain = 'www';
+}
+if (recommendedSubdomain === 'us') {
+recommendedSubdomain = 'www';
+}else if (recommendedSubdomain === 'cn') {
+recommendedSubdomain = 'ww2';
+}
+recommendedLink = $('a[data-subdomain=\'' + recommendedSubdomain + '\'][data-recommended-text]');
+var countryButtons;
+if(recommendedSubdomain === 'ch') {
+countryButtons = $('.ch-recommendation .recommendation-button');
+$('.ch-recommendation').show();
+$('.zh-recommendation').hide();
+$('.default-recommendation').hide();
+} else if(recommendedSubdomain === 'ww2') {
+countryButtons = $('.zh-recommendation .recommendation-button');
+$('.zh-recommendation').show();
+$('.ch-recommendation').hide();
+$('.default-recommendation').hide();
+}
+} else if (visitorPrefDomain) {
+recommendedSubdomain = domainUtils.getSubdomain(visitorPrefDomain);
+recommendedLink = $('a[data-subdomain=\'' + recommendedSubdomain + '\'][data-recommended-text]');
+var countryButtons;
+if(recommendedSubdomain === 'ch') {
+countryButtons = $('.ch-recommendation .recommendation-button');
+$('.ch-recommendation').show();
+$('.zh-recommendation').hide();
+$('.default-recommendation').hide();
+} else if(recommendedSubdomain === 'ww2') {
+countryButtons = $('.zh-recommendation .recommendation-button');
+$('.zh-recommendation').show();
+$('.ch-recommendation').hide();
+$('.default-recommendation').hide();
+}
+}
+if (!recommendedLink) {
+recommendedSubdomain = 'www';
+recommendedLink = $('a[data-subdomain=\'' + recommendedSubdomain + '\'][data-recommended-text]');
+}
+$('.recommended-country').text(recommendedLink.data('recommended-text'));
+$('#recommended_domain_button').attr('href', recommendedLink.attr('href'));
+$('#recommended_domain_button').attr('data-lang', recommendedLink.attr('data-lang'));
+if(countryButtons !== undefined) {
+countryButtons.click(function(e) {
+e.preventDefault();
+var selectedDomain = domainUtils.getDomain(this.href);
+var selectedLang = $(this).data('lang');
+domainUtils.setCookies(selectedDomain, selectedLang);
+domainUtils.switchDomain(selectedDomain, selectedLang);
+});
+} else {
+var recommendedDomainButton = $('#recommended_domain_button');
+$('.recommended-country-button').text(recommendedLink.data('recommended-text'));
+recommendedDomainButton.attr('href', recommendedLink.attr('href'));
+recommendedDomainButton.data('lang', recommendedLink.data('lang'));
+recommendedDomainButton.click(function (e) {
+e.preventDefault();
+var selectedDomain = domainUtils.getDomain(this.href);
+var selectedLang = $(this).data('lang');
+domainUtils.setCookie(selectedDomain, selectedLang);
+domainUtils.switchDomain(selectedDomain, selectedLang);
+});
+}
+$('a.worldwide_link').attr('href', recommendedLink.attr('href'));
+$('a.worldwide_link').data('lang', recommendedLink.data('lang'));
+$('body').on('click', 'a.worldwide_link', function (e) {
+e.preventDefault();
+var selectedDomain = domainUtils.getDomain(this.href);
+var selectedLang = $(this).data('lang');
+domainUtils.setCookies(selectedDomain, selectedLang);
+var href = e.target.getAttribute('href');
+var worldwideLink = '/company/worldwide.html?s_tid=dmselect_cta&requestedDomain=';
+if(href) {
+location.href = href + worldwideLink;
+}
+});
+if (akamaiCountryCode === 'CN') {
+$('#china_performance_alert').show();
+}
+var crossDomain = "";
+if(domainUtils.endsWith(currentDomain, '.mathworks.cn')){
+crossDomain = countryCodeToDomainMap.get('www');
+}else{
+crossDomain = countryCodeToDomainMap.get('ww2');
+}
+if ((!domainUtils.endsWith(currentDomain, '.mathworks.com') && !domainUtils.endsWith(currentDomain, '.mathworks.cn')) || domainUtils.isExemptUrl(currentUrl)) {
+return;
+}
+if (!visitorPrefDomain) {
+if (akamaiCountryCode) {
+akamaiCountryCode = countrySubdomains[akamaiCountryCode].subdomain;
+var akamaiDeterminedSubdomain = $('a[data-country-code=\'' + akamaiCountryCode.toUpperCase() + '\']').data('subdomain');
+if ((akamaiCountryCode.toLowerCase() === currentSubdomain) || (akamaiDeterminedSubdomain === currentSubdomain)) {
+domainUtils.setCookies(currentDomain, "");
+} else {
+$('#country-unselected').modal('show');
+}
+return;
+}
+if (currentSubdomain === 'www') {
+domainUtils.setCookies(currentDomain, '');
+} else {
+$('#country-unselected').modal('show');
+}
+} else if (akamaiCountryCode === 'CN' && !(visitorPrefDomain === 'CN') && !domainUtils.getCookieVersion(currentDomain)) {
+$('#country-unselected').modal('show');
+}
+});
+</script> <script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/global_nav.js.download"></script>
+
+                              <script>!function(a){var e="https://s.go-mpulse.net/boomerang/",t="addEventListener";if("False"=="True")a.BOOMR_config=a.BOOMR_config||{},a.BOOMR_config.PageParams=a.BOOMR_config.PageParams||{},a.BOOMR_config.PageParams.pci=!0,e="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="LERXA-6VNES-W6PXS-U8C7F-BXSZH",function(){function n(e){a.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!a.BOOMR||!a.BOOMR.version&&!a.BOOMR.snippetExecuted){a.BOOMR=a.BOOMR||{},a.BOOMR.snippetExecuted=!0;var i,_,o,r=document.createElement("iframe");if(a[t])a[t]("load",n,!1);else if(a.attachEvent)a.attachEvent("onload",n);r.src="javascript:void(0)",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="width:0;height:0;border:0;display:none;",o=document.getElementsByTagName("script")[0],o.parentNode.insertBefore(r,o);try{_=r.contentWindow.document}catch(O){i=document.domain,r.src="javascript:var d=document.open();d.domain='"+i+"';void(0);",_=r.contentWindow.document}_.open()._l=function(){var a=this.createElement("script");if(i)this.domain=i;a.id="boomr-if-as",a.src=e+"LERXA-6VNES-W6PXS-U8C7F-BXSZH",BOOMR_lstart=(new Date).getTime(),this.body.appendChild(a)},_.write("<bo"+'dy onload="document._l();">'),_.close()}}(),"".length>0)if(a&&"performance"in a&&a.performance&&"function"==typeof a.performance.setResourceTimingBufferSize)a.performance.setResourceTimingBufferSize();!function(){if(BOOMR=a.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var e=""=="true"?1:0,t="",n="mk724hqxfutewy6zygga-f-97917e069-clientnsv4-s.akamaihd.net",i="false"=="true"?2:1,_={"ak.v":"34","ak.cp":"31027","ak.ai":parseInt("195948",10),"ak.ol":"0","ak.cr":15,"ak.ipv":4,"ak.proto":"h2","ak.rid":"50acb623","ak.r":40285,"ak.a2":e,"ak.m":"x","ak.n":"essl","ak.bpcip":"98.191.174.0","ak.cport":59489,"ak.gh":"23.45.45.180","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.csrc":"-","ak.acc":"","ak.t":"1675215244","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==UrIadjReWowCuhPhGNI1ZMigUP6sYPh3UxxLb8npdaP+ZILdR9tYctuVr6Z7bej07yJ+Y6YDqaKqYWxOobm0/5tv+HHY3e+ripwd3fpCldfh/wcNQ4vMWVZEowzFly9MDEOxi/lRy7FfZijQ7sKNeZ5dZl1NvenSqYjWSClW19YDXRAmqHSbxkolFZhVjLD5fETFcDcLNGh1RpXiHeo9YVZzsdhzKmtrNksKnGYvQfEMbLanyXZISTX/GDR27D4ufCD9wH3gFMdRbt6spWmnOPicYClgREVxLe5RBTNxPZ92MMEW5XDJTMNoocuKNYT2WniWnjbysKGkXDAen5N291jugJlPWYmqGBEdjpKrXAxo8Ggcm50Wd4WdmOja+b4posNb4W2w75MDL17O1Iw1+h4Gy4484S7t+PKxYDku6Ho=","ak.pv":"161","ak.dpoabenc":"","ak.tf":i};if(""!==t)_["ak.ruds"]=t;var o={i:!1,av:function(e){var t="http.initiator";if(e&&(!e[t]||"spa_hard"===e[t]))_["ak.feo"]=void 0!==a.aFeoApplied?1:0,BOOMR.addVar(_)},rv:function(){var a=["ak.bpcip","ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(a)}};BOOMR.plugins.AK={akVars:_,akDNSPreFetchDomain:n,init:function(){if(!o.i){var a=BOOMR.subscribe;a("before_beacon",o.av,null,null),a("onbeacon",o.rv,null,null),o.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script><script>bazadebezolkohpepadr="1957720383"</script><script type="text/javascript" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/74b07353" defer=""></script><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/AppMeasurement.min.js.download" async=""></script><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/AppMeasurement_Module_ActivityMap.min.js.download" async=""></script><style type="text/css"> .qc-cmp-button {    background-color: #0076a8 !important;    border-color: #0076a8 !important;  }  .qc-cmp-button:hover {    border-color: #0076a8 !important;  }  .qc-cmp-alt-action,  .qc-cmp-link {    color: #0076a8 !important;  }  .qc-cmp-button.qc-cmp-secondary-button:hover {    background-color: #0076a8 !important;    border-color: #0076a8 !important;  }  .qc-cmp-button.qc-cmp-secondary-button:hover {    color: #ffffff !important;  }  .qc-cmp-button.qc-cmp-secondary-button {    color: #0076a8 !important;  }  .qc-cmp-button.qc-cmp-secondary-button {    background-color: #eee !important;    border-color: transparent !important;  }  .qc-cmp-ui,  .qc-cmp-ui .qc-cmp-title,  .qc-cmp-ui .qc-cmp-table,  .qc-cmp-ui .qc-cmp-messaging,  .qc-cmp-ui .qc-cmp-sub-title,  .qc-cmp-ui .qc-cmp-vendor-list,  .qc-cmp-ui .qc-cmp-purpose-info,  .qc-cmp-ui .qc-cmp-table-header,  .qc-cmp-ui .qc-cmp-beta-messaging,  .qc-cmp-ui .qc-cmp-main-messaging,  .qc-cmp-ui .qc-cmp-vendor-list-title{    color: #1a1a1a !important;  }  .qc-cmp-ui a,  .qc-cmp-ui .qc-cmp-alt-action {    color: #0076a8 !important;  }  .qc-cmp-ui {    background-color: #fef9ed !important;  } .dvsjko.dvsjko.dvsjko.dvsjko .qc-cmp2-footer .qc-cmp2-summary-buttons button { border-radius: 4px; }.dvsjko.dvsjko.dvsjko.dvsjko .qc-cmp2-footer .qc-cmp2-summary-buttons button:last-child:hover { background-color: #3391b9; }.iicKQX.iicKQX .qc-cmp2-footer .qc-cmp2-buttons-desktop button { border-radius: 4px; }.iicKQX.iicKQX .qc-cmp2-footer .qc-cmp2-buttons-desktop button:last-of-type:hover { background-color: #3391b9; }.iicKQX.iicKQX .qc-cmp2-footer > button { border-radius: 4px; }</style><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/RC0c0f81ed410e441bb7237cfa16e2d916-source.min.js.download" async=""></script><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/js" async=""></script><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/RC1839728bbf994e4a9dcdd343ccfea692-source.min.js.download" async=""></script><style>
+.headernav_matrix button { 
+  width:24px; 
+  height:24px; 
+  padding:0;
+  border: none;
+  background:none transparent; 
+  display:inline-block;
+  transition:color .3s ease;
+  position: relative;
+}
+
+.headernav_matrix button > .icon-matrix { color:#777; font-size:24px; line-height:1.00 !important;}
+.headernav_matrix button:hover > .icon-matrix,
+.headernav_matrix button:focus > .icon-matrix { color:#333; }
+
+/* MATRIX MENU TABLET AND MOBILE*/
+#header_mobile .matrix_container { 
+  margin:1px auto 0; 
+  border:none; 
+  box-shadow:none; 
+  background:#fff; 
+  float:none; 
+  overflow:hidden; 
+  position:relative;
+  z-index:3;
+  display:block !important; 
+  height:auto !important;
+}
+#header_mobile .headernav_matrix > button { 
+  width:auto; 
+  min-width:37px; 
+  height:auto; 
+  min-height:37px; 
+  margin:3.5px -1.5px 0 0; 
+  float:right; 
+}
+#header_mobile .headernav_matrix > button > .icon-matrix { color:#0076a8; }
+
+@media (min-width:768px) and (max-width:991px) {
+  .matrix_menu_container_mobile { border-top:1px solid #e7e7e7; }
+}
+
+/* DESKTOP MATRIX MENU */
+.matrix_container { 
+  width:319px; 
+  padding:0 10px 10px; 
+  margin-top:2px; 
+  border:1px solid #999; 
+  background:#fff; 
+  box-shadow:0 1px 3px 0 rgba(0,0,0,0.25); 
+  float:right; 
+  overflow:hidden; 
+  position:absolute; 
+  right:0; 
+  z-index:1037; 
+}
+.matrix_container ul.matrix_links_primary { 
+  border-bottom:1px solid #ccc; 
+}
+.matrix_container ul[class*="matrix_links_"] { 
+  width:100%; 
+  padding:10px 0 0; 
+  margin-bottom:0; 
+  float:left; 
+} 
+.matrix_container ul[class*="matrix_links_"] > li { 
+  width:99px; 
+  height:72px;
+  padding:0 5px;
+  margin:0 0 10px; 
+  float:left;
+  font-size:12px; 
+  line-height:1.25; 
+  text-align:center; 
+  white-space:nowrap; 
+} 
+.matrix_container ul[class*="matrix_links_"] > li > a { 
+  width:100%; 
+  padding:7px 0 0 0; 
+  border:none;
+  color: #0076a8 !important;
+  background:transparent; 
+  display:block; 
+  text-decoration:none !important; 
+}
+
+.matrix_container ul[class*="matrix_links_"] > li > a > img { 
+  height:38px; 
+  padding:2px; 
+  width:auto; 
+  margin:0 auto 7px; 
+  border:1px solid transparent; 
+  border-radius:5px; 
+  background-color:#fff; 
+  display:block; 
+  transition:background-color .3s ease, border-color 0.3s ease; 
+}
+.matrix_container ul[class*="matrix_links_"] > li > a > .matrix_link_title { 
+  max-width:89px; 
+  display:block; 
+  line-height:1.15; 
+  white-space:normal; 
+}
+
+.matrix_container ul[class*="matrix_links_"] > li > a:hover > img,
+.matrix_container ul[class*="matrix_links_"] > li.matrix_active > a > img { 
+  border-color:#999;  
+  background-color:#f5f5f5; 
+}
+.matrix_container_zh { 
+  font-family:"Microsoft YaHei","Segoe UI",Arial,Helvetica; 
+}
+.matrix_container_ja { 
+  font-family:Meiryo,Verdana,Arial,Helvetica,"MS P ゴシック"; 
+}
+.matrix_container_kr { 
+  font-family:Malgun Gothic, Apple Gothic, Arial, sans-serif; 
+}
+
+[class*="matrix_container_"].matrix_container ul[class*="matrix_links_"] > li { 
+  height:90px; 
+}
+[class*="matrix_container_"] { padding-bottom:0; }
+[class*="matrix_container_"].matrix_container ul[class*="matrix_links_"] > li > a { 
+  padding-bottom:2px; 
+}
+[class*="matrix_container_"].matrix_container .matrix_link_title { 
+  font-size:13px !important; 
+  line-height:1.20 !important; 
+}</style><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/RCb721adba20764bcfb94f83ebfb62dc6b-source.min.js.download" async=""></script><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/RCedfaed1d03de47189f18649f7e2d6cb0-source.min.js.download" async=""></script><meta http-equiv="origin-trial" content="A751Xsk4ZW3DVQ8WZng2Dk5s3YzAyqncTzgv+VaE6wavgTY0QHkDvUTET1o7HanhuJO8lgv1Vvc88Ij78W1FIAAAAAB7eyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A751Xsk4ZW3DVQ8WZng2Dk5s3YzAyqncTzgv+VaE6wavgTY0QHkDvUTET1o7HanhuJO8lgv1Vvc88Ij78W1FIAAAAAB7eyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjgwNjUyNzk5LCJpc1RoaXJkUGFydHkiOnRydWV9"><script type="text/javascript" async="" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/f.txt"></script><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/last-event-tag-latest.min.js.download"></script><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/RC906de277bfc24b12a4b2a22af2719a77-source.min.js.download" async=""></script><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/RC9389a43a603e47a8bb02e7005fe391cf-source.min.js.download" async=""></script><img id="kewVF8nz8F8iowQTomHn" style="display:none" alt="" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/generic"><img id="RRbUJ62CVxF2mfvjKRcV" referrerpolicy="unsafe-url" style="display:none" alt="" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/t.gif"><script id="term-e7e5d07437489" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/t.js.download"></script><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/RC674a4c4f3dcf4045a7d0f57a972d2437-source.min.js.download" async=""></script><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/RC7122871c36bb4b8e95d40300bc105d5f-source.min.js.download" async=""></script><style type="text/css" id="ki-k0l-ky1"></style><style type="text/css" id="ki-k0l-kyu"></style></head>
+
+<body id="responsive_offcanvas" class="no_animate offcanvas_active locked" data-new-gr-c-s-check-loaded="14.1095.0" data-gr-ext-installed="">
+  <a class="skip_link sr-only" href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#skip_link_anchor">Skip to content</a>
+
+  <!-- Mobile TopNav: Start -->
+<div class="header visible-xs visible-sm" id="header_mobile" translate="no" style="">
+<nav class="navbar navbar-default" role="navigation">
+<div class="navbar-header">
+<div class="container-fluid">
+<div class="row">
+<div class="col-xs-3">
+<button type="button" class="navbar-toggle topnav_toggle" data-toggle="collapse" data-target="#topnav_collapse">
+<span class="sr-only">Toggle Main Navigation</span>
+<span class="icon-menu"></span>
+</button>
+</div>
+<div class="col-xs-6">
+<div class="text-center">
+<a href="https://www.mathworks.com/?s_tid=gn_logo" class="svg_link navbar-brand">
+<img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/pic-header-mathworks-logo.svg" class="mw_logo" alt="MathWorks">
+</a>
+</div>
+</div>
+<div class="col-xs-3">
+<div class="matrix_affordance_container_mobile" id="matrix_affordance_container_mobile"><div id="headernav_matrix_small" class="headernav_matrix"><button title="Matrix Menu" class="navbar-toggle matrix_toggle" data-toggle="collapse" data-target="#matrix_collapse" id="matrix_waffle_small" aria-label="Mathworks Menu" type="button"><span class="icon-matrix"></span></button></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="container-fluid">
+<div class="row visible-xs visible-sm">
+<div class="col-xs-12">
+<div class="navbar-collapse collapse" id="topnav_collapse">
+<ul class="nav navbar-nav topnav" id="topnav_mobile"><li class="headernav_login dropdown"><a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#" class="dropdown-toggle mwa_image_drop_down" data-toggle="dropdown" style="background-image:url(/matlabcentral/profiles/23560603_1629485341838_DEF.jpg), url(/images/responsive/global/ico-header-account-active.svg)" role="button" aria-haspopup="true" aria-expanded="false"><span class="visible-lg visible-md"><span class="sr-only">Access your MathWorks Account</span></span><span class="visible-xs visible-sm"><span class="mobile_account_image" style="background-image:url(/matlabcentral/profiles/23560603_1629485341838_DEF.jpg), url(/images/responsive/global/ico-header-account-active.svg)"></span><span class="sr-only">Access your MathWorks Account</span><span aria-hidden="true">Vishal</span><b class="caret"></b></span></a><ul class="dropdown-menu" role="menu"><li class="mwa-nav_account"><a href="https://www.mathworks.com/mwaccount/">My Account</a></li><li class="mwa-nav_community"><a href="https://www.mathworks.com/matlabcentral/profile/authors/my_profile?s_tid=gn_comm">My Community Profile</a></li><li class="mwa-nav_associate"><a href="https://www.mathworks.com/licensecenter/workflows/associate_license?s_tid=gn_aslc">Link License</a></li><li class="mwa-nav_logout"><a href="https://www.mathworks.com/login/logout?uri=https%3A%2F%2Fwww.mathworks.com%2Fhelp%2Fcontrol%2Fug%2Fcontrol-of-an-inverted-pendulum-on-a-cart.html">Sign Out</a></li></ul></li>
+<li class="topnav_products "><a href="https://www.mathworks.com/products.html?s_tid=gn_ps">Products</a></li>
+<li class="topnav_solutions "><a href="https://www.mathworks.com/solutions.html?s_tid=gn_sol">Solutions</a></li>
+<li class="topnav_academia "><a href="https://www.mathworks.com/academia.html?s_tid=gn_acad">Academia</a></li>
+<li class="topnav_support "><a href="https://www.mathworks.com/help/?s_tid=gn_supp">Support</a></li>
+<li class="topnav_community "><a href="https://www.mathworks.com/matlabcentral/?s_tid=gn_mlc">Community</a></li>
+<li class="topnav_events "><a href="https://www.mathworks.com/company/events.html?s_tid=gn_ev">Events</a></li>
+<li class="headernav_store"><a href="https://login.mathworks.com/embedded-login/landing.html?cid=getmatlab&amp;s_tid=gn_getml">Get MATLAB</a></li>
+</ul>
+</div>
+<div class="navbar-collapse collapse" id="matrix_collapse">
+<div class="matrix_menu_container_mobile" id="matrix_menu_container_mobile"><header class="App-header"><div class="matrix_container collapse" aria-describedby="matrix_title"><nav class="matrix_content"><h3 class="sr-only" id="matrix_title">MathWorks Matrix Menu</h3><ul class="list-unstyled matrix_links_primary"><li class=""><a class="svg_link" href="https://matlab.mathworks.com/" role="button" aria-label="MATLAB" id="matrix_link_matlab_home"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-matlabonline.svg" alt="matlab_home" aria-hidden="true"><span class="matrix_link_title">MATLAB</span></a></li><li class=""><a class="svg_link" href="https://www.mathworks.com/help/" role="button" aria-label="Help Center" id="matrix_link_help_center"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-helpcenter.svg" alt="help_center" aria-hidden="true"><span class="matrix_link_title">Help Center</span></a></li><li class=""><a class="svg_link" href="https://www.mathworks.com/" role="button" aria-label="MathWorks" id="matrix_link_mathworks_dotcom"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-mathworks.svg" alt="mathworks_dotcom" aria-hidden="true"><span class="matrix_link_title">MathWorks</span></a></li></ul><ul class="list-unstyled matrix_links_secondary"><li class=""><a class="svg_link" href="https://www.mathworks.com/matlabcentral/answers/index" role="button" aria-label="MATLAB Answers" id="matrix_link_answers"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-answers.svg" alt="answers" aria-hidden="true"><span class="matrix_link_title">MATLAB Answers</span></a></li><li class=""><a class="svg_link" href="https://www.mathworks.com/matlabcentral/fileexchange" role="button" aria-label="File Exchange" id="matrix_link_file_exchange"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-fileexchange.svg" alt="file_exchange" aria-hidden="true"><span class="matrix_link_title">File Exchange</span></a></li><li class=""><a class="svg_link" href="https://www.mathworks.com/videos.html" role="button" aria-label="Videos" id="matrix_link_videos"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-videos.svg" alt="videos" aria-hidden="true"><span class="matrix_link_title">Videos</span></a></li><li class=""><a class="svg_link" href="https://matlabacademy.mathworks.com/" role="button" aria-label="Online Training" id="matrix_link_online_training"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-onlinetraining.svg" alt="online_training" aria-hidden="true"><span class="matrix_link_title">Online Training</span></a></li><li class=""><a class="svg_link" href="https://blogs.mathworks.com/" role="button" aria-label="Blogs" id="matrix_link_blogs"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-blogs.svg" alt="blogs" aria-hidden="true"><span class="matrix_link_title">Blogs</span></a></li><li class=""><a class="svg_link" href="https://www.mathworks.com/matlabcentral/cody" role="button" aria-label="Cody" id="matrix_link_cody"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-cody.svg" alt="cody" aria-hidden="true"><span class="matrix_link_title">Cody</span></a></li><li class=""><a class="svg_link" href="https://drive.matlab.com/" role="button" aria-label="MATLAB Drive" id="matrix_link_matlab_drive"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-matlabdrive.svg" alt="matlab_drive" aria-hidden="true"><span class="matrix_link_title">MATLAB Drive</span></a></li><li class=""><a class="svg_link" href="https://thingspeak.com/" role="button" aria-label="ThingSpeak" id="matrix_link_thingspeak"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-thingspeak.svg" alt="thingspeak" aria-hidden="true"><span class="matrix_link_title">ThingSpeak</span></a></li><li class=""><a class="svg_link" href="https://www.mathworks.com/support/bugreports/" role="button" aria-label="Bug Reports" id="matrix_link_bug_reports"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-bugreports.svg" alt="bug_reports" aria-hidden="true"><span class="matrix_link_title">Bug Reports</span></a></li><li class=""><a class="svg_link" href="https://www.mathworks.com/matlabcentral/" role="button" aria-label="Community" id="matrix_link_community"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-community.svg" alt="community" aria-hidden="true"><span class="matrix_link_title">Community</span></a></li></ul></nav></div></header></div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</div>
+<!-- Mobile TopNav: End -->
+<!-- Desktop TopNav: Start -->
+<div class="header hidden-xs hidden-sm" id="header_desktop" translate="no">
+<nav class="navbar navbar-default" role="navigation">
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-9">
+<div class="navbar-header">
+<div class="logo_container hidden-xs hidden-sm">
+<a href="https://www.mathworks.com/?s_tid=gn_logo" class="svg_link pull-left">
+<img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/pic-header-mathworks-logo.svg" class="mw_logo" alt="MathWorks">
+</a>
+</div>
+<div class="navbar-collapse collapse hidden-xs hidden-sm">
+<ul class="nav navbar-nav topnav" id="topnav_desktop">
+<li class="topnav_products "><a href="https://www.mathworks.com/products.html?s_tid=gn_ps">Products</a></li>
+<li class="topnav_solutions "><a href="https://www.mathworks.com/solutions.html?s_tid=gn_sol">Solutions</a></li>
+<li class="topnav_academia "><a href="https://www.mathworks.com/academia.html?s_tid=gn_acad">Academia</a></li>
+<li class="topnav_support "><a href="https://www.mathworks.com/help/?s_tid=gn_supp">Support</a></li>
+<li class="topnav_community "><a href="https://www.mathworks.com/matlabcentral/?s_tid=gn_mlc">Community</a></li>
+<li class="topnav_events "><a href="https://www.mathworks.com/company/events.html?s_tid=gn_ev">Events</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-3">
+<div class="collapse navbar-collapse" id="headernav_collapse">
+<ul class="nav navbar-nav navbar-right" id="headernav">
+<li class="headernav_store"><a href="https://login.mathworks.com/embedded-login/landing.html?cid=getmatlab&amp;s_tid=gn_getml" class="btn btn_color_blue companion_btn btn-xs">Get MATLAB</a></li>
+<li class="headernav_login dropdown"><a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#" class="dropdown-toggle mwa_image_drop_down" data-toggle="dropdown" style="background-image:url(/matlabcentral/profiles/23560603_1629485341838_DEF.jpg), url(/images/responsive/global/ico-header-account-active.svg)" role="button" aria-haspopup="true" aria-expanded="false"><span class="visible-lg visible-md"><span class="sr-only">Access your MathWorks Account</span></span><span class="visible-xs visible-sm"><span class="mobile_account_image" style="background-image:url(/matlabcentral/profiles/23560603_1629485341838_DEF.jpg), url(/images/responsive/global/ico-header-account-active.svg)"></span><span class="sr-only">Access your MathWorks Account</span><span aria-hidden="true">Vishal</span><b class="caret"></b></span></a><ul class="dropdown-menu" role="menu"><li class="mwa-nav_account"><a href="https://www.mathworks.com/mwaccount/">My Account</a></li><li class="mwa-nav_community"><a href="https://www.mathworks.com/matlabcentral/profile/authors/my_profile?s_tid=gn_comm">My Community Profile</a></li><li class="mwa-nav_associate"><a href="https://www.mathworks.com/licensecenter/workflows/associate_license?s_tid=gn_aslc">Link License</a></li><li class="mwa-nav_logout"><a href="https://www.mathworks.com/login/logout?uri=https%3A%2F%2Fwww.mathworks.com%2Fhelp%2Fcontrol%2Fug%2Fcontrol-of-an-inverted-pendulum-on-a-cart.html">Sign Out</a></li></ul></li><li id="headernav_matrix" class="headernav_matrix"><div id="wrapper"><button title="Matrix Menu" class="waffle" id="matrix_waffle_large" aria-label="Mathworks Menu" type="button"><span class="icon-matrix"></span></button><header class="App-header"><div class="matrix_container collapse" aria-describedby="matrix_title"><nav class="matrix_content"><h3 class="sr-only" id="matrix_title">MathWorks Matrix Menu</h3><ul class="list-unstyled matrix_links_primary"><li class=""><a class="svg_link" href="https://matlab.mathworks.com/" role="button" aria-label="MATLAB" id="matrix_link_matlab_home"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-matlabonline.svg" alt="matlab_home" aria-hidden="true"><span class="matrix_link_title">MATLAB</span></a></li><li class=""><a class="svg_link" href="https://www.mathworks.com/help/" role="button" aria-label="Help Center" id="matrix_link_help_center"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-helpcenter.svg" alt="help_center" aria-hidden="true"><span class="matrix_link_title">Help Center</span></a></li><li class=""><a class="svg_link" href="https://www.mathworks.com/" role="button" aria-label="MathWorks" id="matrix_link_mathworks_dotcom"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-mathworks.svg" alt="mathworks_dotcom" aria-hidden="true"><span class="matrix_link_title">MathWorks</span></a></li></ul><ul class="list-unstyled matrix_links_secondary"><li class=""><a class="svg_link" href="https://www.mathworks.com/matlabcentral/answers/index" role="button" aria-label="MATLAB Answers" id="matrix_link_answers"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-answers.svg" alt="answers" aria-hidden="true"><span class="matrix_link_title">MATLAB Answers</span></a></li><li class=""><a class="svg_link" href="https://www.mathworks.com/matlabcentral/fileexchange" role="button" aria-label="File Exchange" id="matrix_link_file_exchange"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-fileexchange.svg" alt="file_exchange" aria-hidden="true"><span class="matrix_link_title">File Exchange</span></a></li><li class=""><a class="svg_link" href="https://www.mathworks.com/videos.html" role="button" aria-label="Videos" id="matrix_link_videos"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-videos.svg" alt="videos" aria-hidden="true"><span class="matrix_link_title">Videos</span></a></li><li class=""><a class="svg_link" href="https://matlabacademy.mathworks.com/" role="button" aria-label="Online Training" id="matrix_link_online_training"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-onlinetraining.svg" alt="online_training" aria-hidden="true"><span class="matrix_link_title">Online Training</span></a></li><li class=""><a class="svg_link" href="https://blogs.mathworks.com/" role="button" aria-label="Blogs" id="matrix_link_blogs"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-blogs.svg" alt="blogs" aria-hidden="true"><span class="matrix_link_title">Blogs</span></a></li><li class=""><a class="svg_link" href="https://www.mathworks.com/matlabcentral/cody" role="button" aria-label="Cody" id="matrix_link_cody"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-cody.svg" alt="cody" aria-hidden="true"><span class="matrix_link_title">Cody</span></a></li><li class=""><a class="svg_link" href="https://drive.matlab.com/" role="button" aria-label="MATLAB Drive" id="matrix_link_matlab_drive"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-matlabdrive.svg" alt="matlab_drive" aria-hidden="true"><span class="matrix_link_title">MATLAB Drive</span></a></li><li class=""><a class="svg_link" href="https://thingspeak.com/" role="button" aria-label="ThingSpeak" id="matrix_link_thingspeak"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-thingspeak.svg" alt="thingspeak" aria-hidden="true"><span class="matrix_link_title">ThingSpeak</span></a></li><li class=""><a class="svg_link" href="https://www.mathworks.com/support/bugreports/" role="button" aria-label="Bug Reports" id="matrix_link_bug_reports"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-bugreports.svg" alt="bug_reports" aria-hidden="true"><span class="matrix_link_title">Bug Reports</span></a></li><li class=""><a class="svg_link" href="https://www.mathworks.com/matlabcentral/" role="button" aria-label="Community" id="matrix_link_community"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-matrix-community.svg" alt="community" aria-hidden="true"><span class="matrix_link_title">Community</span></a></li></ul></nav></div></header></div></li></ul>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</div>
+<!-- Desktop TopNav: End -->
+<!-- Conjoined Header: Start -->
+<!-- Section Header: Start -->
+<div class="section_header level_3">
+<div class="container-fluid">
+<div class="row" id="mobile_search_row">
+<div class="col-sm-6 col-md-7 has_horizontal_local_nav" id="section_header_title">
+<div class="section_header_content">
+<div class="section_header_title">
+<p class="h1"><a xmlns="http://www.w3.org/1999/xhtml" href="https://www.mathworks.com/help/index.html" class="coming_from_product">Help Center</a><a xmlns="http://www.w3.org/1999/xhtml" href="https://www.mathworks.com/help/index.html" class="not_coming_from_product">Help Center</a></p>
+</div>
+</div>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-5" id="mobile_search">
+<div class="search_nested_content_container">
+<div id="search_scope_support" class="collapse in"> <form id="docsearch_form" action="https://www.mathworks.com/support/search.html" method="get" accept-charset="utf-8" data-release="R2022b" data-language="en">
+<div class="input-group">
+<label class="sr-only">Search Help Center</label>
+<input id="suggestion" type="hidden" name="suggestion" value="">
+<span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+<input id="docsearch" class="form-control conjoined_search" type="search" name="q" placeholder="Search Help Center" autocomplete="off">
+<div class="input-group-btn">
+<button type="button" class="btn btn_search_adjacent dropdown-toggle" data-toggle="dropdown"><span class="caret"></span><span class="search_scope_label">Help Center</span></button>
+<ul class="dropdown-menu list-unstyled dropdown-menu-right" role="menu">
+<!--<li data-toggle="collapse" data-target="#search_scope_support"><a href="#">Support</a></li>-->
+<li data-toggle="collapse" data-target="#search_scope_site" class="support_search_scope_trigger"><a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#">MathWorks</a></li>
+</ul>
+<script>$(".support_search_scope_trigger").click(function() {$("#search_scope_support").removeClass("in");$("#query").val($("#search").val());});</script>
+<button type="submit" name="submitsearch" id="support_submitsearch" class="btn icon-search btn_search_adjacent btn_search icon_16"></button>
+</div>
+</div>
+</form>
+</div>
+<div id="search_scope_site" class="collapse"> <form name="search" id="site_search" class="site_search" action="https://www.mathworks.com/search/site_search.html" method="get">
+<div class="input-group">
+<label class="sr-only">Search MathWorks.com</label>
+<input type="hidden" name="c[]" value="entire_site">
+<input type="search" name="q" id="query" class="form-control conjoined_search" placeholder="Search MathWorks.com" autocomplete="off">
+<div class="input-group-btn">
+<button type="button" class="btn btn_search_adjacent dropdown-toggle" data-toggle="dropdown"><span class="caret"></span><span class="search_scope_label">MathWorks</span></button>
+<ul class="dropdown-menu list-unstyled dropdown-menu-right" role="menu">
+<li data-toggle="collapse" data-target="#search_scope_support" class="site_search_scope_trigger"><a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#">Help Center</a></li>
+</ul>
+<script>$(".site_search_scope_trigger").click(function() {$("#search_scope_site").removeClass("in");$("#search").val($("#query").val());});</script>
+<button type="submit" id="searchbutton" class="btn icon-search btn_search_adjacent btn_search icon_16"></button>
+</div>
+</div>
+</form>
+</div>
+</div>
+<button class="btn icon-remove btn_search pull-right icon_32 visible-xs" data-toggle="collapse" href="#mobile_search" aria-expanded="false" aria-controls="mobile_search"><span class="sr-only">Close Mobile Search</span></button>
+</div>
+<div class="visible-xs" id="search_actuator">
+<button class="btn icon-search btn_search pull-right icon_16" data-toggle="collapse" href="#mobile_search" aria-expanded="false" aria-controls="mobile_search"><span class="sr-only">Open Mobile Search</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Section Header: End -->
+<!-- Conjoined Header: End -->
+
+  <div class="row-offcanvas row-offcanvas-left active">
+  
+    <div class="sidebar-offcanvas" id="sidebar" style="height: 651px; position: fixed; top: 52px;">
+      <nav class="offcanvas_nav" role="navigation"> 
+      
+        <div class="offcanvas_actuator active" data-toggle="offcanvas" data-target="#sidebar" id="nav_toggle">
+          <button type="button" class="btn">
+            <span class="sr-only">Off-Canvas Navigation Menu Toggle</span>
+            <span class="icon-menu"></span>
+          </button>
+          <span class="offcanvas_actuator_label" id="translation_icon-menu" tabindex="-1" aria-hidden="true"></span>
+          <!-- <span class="offcanvas_actuator_close" tabindex="-1" aria-hidden="true"></span> -->
+        </div>
+
+          <div class="nav_list_wrapper" id="nav_list_wrapper">
+            <nav class="offcanvas_nav" role="navigation">
+                <ul xmlns="http://www.w3.org/1999/xhtml" class="nav_breadcrumb" id="ul_left_nav_ancestors"><li itemscope="" itemtype="http://www.data-vocabulary.org/Breadcrumb" itemprop="breadcrumb"><a href="https://www.mathworks.com/help/index.html?s_tid=CRUX_lftnav" itemprop="url"><span itemprop="title">Documentation Home</span></a></li></ul><ul xmlns="http://www.w3.org/1999/xhtml" class="nav_breadcrumb" id="ul_left_nav_productgroups"><li itemscope="" itemtype="http://www.data-vocabulary.org/Breadcrumb" itemprop="breadcrumb"><a href="https://www.mathworks.com/help/overview/control-systems.html?s_tid=hc_product_group_bc" itemprop="url"><span itemprop="title">Control Systems</span></a></li></ul>
+<ul xmlns="http://www.w3.org/1999/xhtml" class="nav_disambiguation"><li><a href="https://www.mathworks.com/help/control/index.html?s_tid=CRUX_lftnav">Control System Toolbox</a>
+</li>
+<li itemscope="" itemtype="http://www.data-vocabulary.org/Breadcrumb" itemprop="breadcrumb"><a href="https://www.mathworks.com/help/control/control-design.html?s_tid=CRUX_lftnav" itemprop="url"><span itemprop="title">Control System Design and Tuning</span></a></li><li itemscope="" itemtype="http://www.data-vocabulary.org/Breadcrumb" itemprop="breadcrumb"><a href="https://www.mathworks.com/help/control/control-system-tuning.html?s_tid=CRUX_lftnav" itemprop="url"><span itemprop="title">Multiloop, Multiobjective Tuning</span></a></li><li itemscope="" itemtype="http://www.data-vocabulary.org/Breadcrumb" itemprop="breadcrumb"><a href="https://www.mathworks.com/help/control/programmatic-control-system-tuning.html?s_tid=CRUX_lftnav" itemprop="url"><span itemprop="title">Programmatic Tuning</span></a></li><li itemscope="" itemtype="http://www.data-vocabulary.org/Breadcrumb" itemprop="breadcrumb"><a href="https://www.mathworks.com/help/control/tuning-1.html?s_tid=CRUX_lftnav" itemprop="url"><span itemprop="title">Tuning, Analysis, and Validation</span></a></li></ul><ul xmlns="http://www.w3.org/1999/xhtml" class="nav_scrollspy nav">
+<li class="nav_scrollspy_function"><a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#responsive_offcanvas">Control of an Inverted Pendulum on a Cart</a></li>
+<li class="nav_scrollspy_title" id="SSPY810-section">On this page</li>
+<!--ADD_REFENTRY_TITLE_HERE 11--><li class="active"><a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#d124e77096" class="intrnllnk">Pendulum/Cart Assembly</a></li><li><a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#d124e77135" class="intrnllnk">Control Structure</a></li><li><a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#d124e77155" class="intrnllnk">Design Requirements</a></li><li><a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#d124e77211" class="intrnllnk">Control System Tuning</a></li><li><a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#d124e77244" class="intrnllnk">Validation</a></li><li><a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#d124e77300" class="intrnllnk">See Also</a></li><li><a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#d124e77309" class="intrnllnk">Related Topics</a></li></ul>
+
+            </nav>
+          </div>
+        
+        <script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/offcanvas_v2.js.download"></script>
+        
+
+      </nav>       
+    </div>
+
+    <!-- MOBILE CTA - Begin -->
+    <!-- MOBILE CTA - End -->
+
+
+    <div class="offcanvas_content_container" style="padding-right: 0px;">
+
+      <div class="sticky_header_container affix" style="width: auto;">
+        <div class="horizontal_nav">
+          <div class="horizontal_nav_container">
+            <div class="offcanvas_horizontal_nav">
+              <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12 col-md-7 col-lg-8 hidden-xs">
+                    
+                    <script>
+                      var translateMore = translateMore || {};
+                      translateMore.locale = "More"; 
+                    </script>
+
+                    <nav class="navbar navbar-default" role="navigation" id="subnav">
+                      <div>
+                          <ul class="nav navbar-nav crux_browse">
+                        <li xmlns="http://www.w3.org/1999/xhtml" id="crux_nav_documentation" class="crux_resource active">Documentation</li><li xmlns="http://www.w3.org/1999/xhtml" id="crux_nav_example" class="crux_resource"><a href="https://www.mathworks.com/help/control/examples.html?category=tuning-1&amp;s_tid=CRUX_topnav">Examples</a></li><li xmlns="http://www.w3.org/1999/xhtml" id="crux_nav_function" class="crux_resource"><a href="https://www.mathworks.com/help/control/referencelist.html?type=function&amp;category=tuning-1&amp;s_tid=CRUX_topnav">Functions</a></li><li xmlns="http://www.w3.org/1999/xhtml" id="crux_nav_block" class="crux_resource"><a href="https://www.mathworks.com/help/control/referencelist.html?type=block&amp;category=tuning-1&amp;s_tid=CRUX_topnav">Blocks</a></li><li xmlns="http://www.w3.org/1999/xhtml" id="crux_nav_app" class="crux_resource"><a href="https://www.mathworks.com/help/control/referencelist.html?type=app&amp;category=tuning-1&amp;s_tid=CRUX_topnav">Apps</a></li><li xmlns="http://www.w3.org/1999/xhtml" id="crux_nav_videos" class="supplemental_crux_resource"><a href="https://www.mathworks.com/support/search.html?fq[]=asset_type_name:video%20category:control/tuning-1&amp;s_tid=CRUX_topnav" class="not_coming_from_product">Videos</a></li><li xmlns="http://www.w3.org/1999/xhtml" id="crux_nav_answers" class="supplemental_crux_resource"><a href="https://www.mathworks.com/support/search.html?fq[]=asset_type_name:answer%20category:control/tuning-1&amp;s_tid=CRUX_topnav" class="not_coming_from_product">Answers</a></li>
+                        </ul>
+                      </div>
+                    </nav>
+                  </div>
+                    <div class="col-md-5 col-lg-4 hidden-xs hidden-sm">
+                      <div class="cta_box">
+<ul class="list-inline">
+<li class="cta_item cta_item_general hidden-sm hidden-xs "><a href="https://www.mathworks.com/campaigns/products/trials.html?prodcode=CT&amp;s_iid=doc_trial_CT_tb" class="icon-download">Trial Software</a></li>
+<li class="hidden-lg hidden-md "><a href="https://www.mathworks.com/campaigns/products/trials.html?prodcode=CT&amp;s_iid=doc_trial_CT_tb" class="btn btn_color_blue btn-block"><span class="icon-download"></span> Trial Software</a></li>
+<li class="cta_item cta_item_general hidden-sm hidden-xs "><a href="https://www.mathworks.com/support/web_downloads_bounce.html?s_cid=1008_degr_docdn_270055" class="icon-download">Product Updates</a></li>
+<li class="hidden-lg hidden-md "><a href="https://www.mathworks.com/support/web_downloads_bounce.html?s_cid=1008_degr_docdn_270055" class="btn btn_color_blue btn-block"><span class="icon-download"></span> Product Updates</a></li>
+</ul>
+</div>
+                    </div>
+                  <!-- Mobile CRUX Nav: START -->
+                  <div class="visible-xs">
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-xs-9"> 
+                          <div class="mobile_crux_nav_trigger">
+                            <!-- Single button -->
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Resources <span class="icon-arrow-down icon_16"></span>  
+                              </button>
+                              <ul class="dropdown-menu">
+                                <li xmlns="http://www.w3.org/1999/xhtml" id="crux_nav_documentation" class="crux_resource active">Documentation</li><li xmlns="http://www.w3.org/1999/xhtml" id="crux_nav_example" class="crux_resource"><a href="https://www.mathworks.com/help/control/examples.html?category=tuning-1&amp;s_tid=CRUX_topnav">Examples</a></li><li xmlns="http://www.w3.org/1999/xhtml" id="crux_nav_function" class="crux_resource"><a href="https://www.mathworks.com/help/control/referencelist.html?type=function&amp;category=tuning-1&amp;s_tid=CRUX_topnav">Functions</a></li><li xmlns="http://www.w3.org/1999/xhtml" id="crux_nav_block" class="crux_resource"><a href="https://www.mathworks.com/help/control/referencelist.html?type=block&amp;category=tuning-1&amp;s_tid=CRUX_topnav">Blocks</a></li><li xmlns="http://www.w3.org/1999/xhtml" id="crux_nav_app" class="crux_resource"><a href="https://www.mathworks.com/help/control/referencelist.html?type=app&amp;category=tuning-1&amp;s_tid=CRUX_topnav">Apps</a></li><li xmlns="http://www.w3.org/1999/xhtml" id="crux_nav_videos" class="supplemental_crux_resource"><a href="https://www.mathworks.com/support/search.html?fq[]=asset_type_name:video%20category:control/tuning-1&amp;s_tid=CRUX_topnav" class="not_coming_from_product">Videos</a></li><li xmlns="http://www.w3.org/1999/xhtml" id="crux_nav_answers" class="supplemental_crux_resource"><a href="https://www.mathworks.com/support/search.html?fq[]=asset_type_name:answer%20category:control/tuning-1&amp;s_tid=CRUX_topnav" class="not_coming_from_product">Answers</a></li>
+                              </ul>
+                            </div>
+                            <!-- Single button -->                      
+                          </div>
+                        </div>
+                        <div class="col-xs-3">
+                          <div class="translate_placeholder"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Mobile CRUX Nav: END -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content_container" id="content_container" style="width: auto;">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12">
+              <div id="offcanvas_focus_actuator" tabindex="0" class="visible-xs"><span class="sr-only">Main Content</span></div>
+              <main id="skip_link_anchor" tabindex="-1">
+                           
+
+
+
+
+
+                         
+    
+                                       
+<div xmlns="http://www.w3.org/1999/xhtml" id="product_info_alert"></div><section xmlns="http://www.w3.org/1999/xhtml" id="doc_center_content" itemprop="content" lang="en" data-language="en"><div id="pgtype-example">                
+
+       
+<section itemprop="content"><div class="example_icon"></div><h1 class="r2022b" itemprop="title content" id="mw_adefe992-dfde-4c0f-bb8e-421fb7794b4e">Control of an Inverted Pendulum on a Cart</h1><div class="examples_short_list hidden_ios_android"><div data-pane="metadata" class="panel metadata_container panel-default"><div class="panel-body metadata_content open_example_div"><button class="btn btn_color_blue btn-block add_margin_10 analyticsOpenWith">Open in MATLAB Online</button><p class="add_margin_5">This example uses:</p><ul class="list-unstyled add_border_bottom example_product_list" itemprop="requiredprods"><li><a class="coming_from_product" href="matlab:matlab.internal.language.introspective.showAddon(&#39;CT&#39;)">Control System Toolbox</a><a class="not_coming_from_product" href="https://www.mathworks.com/help/control/index.html">Control System Toolbox</a></li><li><a class="coming_from_product" href="matlab:matlab.internal.language.introspective.showAddon(&#39;MS&#39;)">Simscape Multibody</a><a class="not_coming_from_product" href="https://www.mathworks.com/help/sm/index.html">Simscape Multibody</a></li><li><a class="coming_from_product" href="matlab:matlab.internal.language.introspective.showAddon(&#39;SD&#39;)">Simulink Control Design</a><a class="not_coming_from_product" href="https://www.mathworks.com/help/slcontrol/index.html">Simulink Control Design</a></li><li><a class="coming_from_product" href="matlab:matlab.internal.language.introspective.showAddon(&#39;SL&#39;)">Simulink</a><a class="not_coming_from_product" href="https://www.mathworks.com/help/simulink/index.html">Simulink</a></li></ul><button type="button" class="btn companion_btn btn_color_blue btn-block copy_cmd_btn" data-toggle="popover" data-placement="bottom" data-trigger="hover focus" title="" data-html="true" data-content="&lt;code&gt;openExample(&#39;control/InvertedPendulumExample&#39;)&lt;/code&gt;" data-original-title="MATLAB Command">Copy Command &nbsp;<span class="icon-mw-copy"><span class="sr-only">Copy Code</span></span></button></div></div></div><div itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/Example" itemprop="example" class="em_example"><meta itemprop="exampleid" content="control-InvertedPendulumExample"><meta itemprop="exampletitle" content="Control of an Inverted Pendulum on a Cart"></div><span id="InvertedPendulumExample" class="anchor_target"></span>
+
+<p class="shortdesc">This example uses <code class="literal">systune</code> to control an inverted pendulum on a cart.</p>
+
+<div class="procedure"><h3 class="title" id="d124e77096">Pendulum/Cart Assembly<span id="InvertedPendulumExample-1" class="anchor_target"></span></h3><p>The cart/pendulum assembly is depicted in Figure 1 and modeled in Simulink® using Simscape™ Multibody™.</p><p></p>
+<div class="informalfigure"><div id="d124e77103" class="mediaobject"><p><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/xxpendulum1.png"></p></div></div><p>
+ </p><p><strong class="emphasis bold">Figure 1: Inverted pendulum on a cart</strong></p><p></p>
+<div class="informalfigure"><div id="d124e77112" class="mediaobject"><p><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/xxpendulum2.png"></p></div></div><p>
+ </p><p><strong class="emphasis bold">Figure 2: Simscape Multibody model</strong></p><p>This system is controlled by exerting a variable force <span class="inlineequation"><span class="inlinemediaobject"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/InvertedPendulumExample_eq01768238589472138476.png" alt="$F$"></span></span> on the cart. The controller needs to keep the pendulum upright while moving the cart to a new position or when the pendulum is nudged forward (impulse disturbance <span class="inlineequation"><span class="inlinemediaobject"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/InvertedPendulumExample_eq14857602725875459914.png" alt="$dF$"></span></span>).</p><h3 class="title" id="d124e77135">Control Structure<span id="InvertedPendulumExample-2" class="anchor_target"></span></h3><p>The upright position is an unstable equilibrium for the inverted pendulum. The unstable nature of the plant makes the control task more challenging. For this example, you use the following two-loop control structure:</p><div class="code_responsive"><div class="programlisting"><div class="codeinput"><pre>open_system(<span style="color:#A020F0">'rct_pendulum.slx'</span>)
+set_param(<span style="color:#A020F0">'rct_pendulum'</span>,<span style="color:#A020F0">'SimMechanicsOpenEditorOnUpdate'</span>,<span style="color:#A020F0">'off'</span>);
+</pre></div></div></div><div class="informalfigure"><div id="d124e77143" class="mediaobject"><p><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/InvertedPendulumExample_01.png"></p></div></div><p>The inner loop uses a second-order state-space controller to stabilize the pendulum in its upright position (<span class="inlineequation"><span class="inlinemediaobject"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/InvertedPendulumExample_eq05246873011375979495.png" alt="$\theta$"></span></span> control), while the outer loop uses a Proportional-Derivative (PD) controller to control the cart position. You use a PD rather than PID controller because the plant already provides some integral action.</p><h3 class="title" id="d124e77155">Design Requirements<span id="InvertedPendulumExample-4" class="anchor_target"></span></h3><p>Use <code class="literal">TuningGoal</code> requirements to specify the desired closed-loop behavior. Specify a response time of 3 seconds for tracking a setpoint change in cart position <span class="inlineequation"><span class="inlinemediaobject"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/InvertedPendulumExample_eq16247206711595679522.png" alt="$x$"></span></span>.</p><div class="code_responsive"><div class="programlisting"><div class="codeinput"><pre><span style="color:#228B22">% Tracking of x command</span>
+req1 = TuningGoal.Tracking(<span style="color:#A020F0">'xref'</span>,<span style="color:#A020F0">'x'</span>,3);
+</pre></div></div></div><p>To adequately reject impulse disturbances <span class="inlineequation"><span class="inlinemediaobject"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/InvertedPendulumExample_eq14857602725875459914.png" alt="$dF$"></span></span> on the tip of the pendulum, use an LQR penalty of the form</p><div id="d124e77182" class="mediaobject"><div class="code_responsive"><p class="programlistingindent"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/InvertedPendulumExample_eq13296317686466593541.png" alt="$$ \int_0^\infty (16 \theta^2(t) + x^2(t) + 0.01 F^2(t)) dt $$"></p></div></div><p>that emphasizes a small angular deviation <span class="inlineequation"><span class="inlinemediaobject"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/InvertedPendulumExample_eq05246873011375979495.png" alt="$\theta$"></span></span> and limits the control effort <span class="inlineequation"><span class="inlinemediaobject"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/InvertedPendulumExample_eq01768238589472138476.png" alt="$F$"></span></span>.</p><div class="code_responsive"><div class="programlisting"><div class="codeinput"><pre><span style="color:#228B22">% Rejection of impulse disturbance dF</span>
+Qxu = diag([16 1 0.01]);
+req2 = TuningGoal.LQG(<span style="color:#A020F0">'dF'</span>,{<span style="color:#A020F0">'Theta'</span>,<span style="color:#A020F0">'x'</span>,<span style="color:#A020F0">'F'</span>},1,Qxu);
+</pre></div></div></div><p>For robustness, require at least 6 dB of gain margin and 40 degrees of phase margin at the plant input.</p><div class="code_responsive"><div class="programlisting"><div class="codeinput"><pre><span style="color:#228B22">% Stability margins</span>
+req3 = TuningGoal.Margins(<span style="color:#A020F0">'F'</span>,6,40);
+</pre></div></div></div><p>Finally, constrain the damping and natural frequency of the closed-loop poles to prevent jerky or underdamped transients.</p><div class="code_responsive"><div class="programlisting"><div class="codeinput"><pre><span style="color:#228B22">% Pole locations</span>
+MinDamping = 0.5;
+MaxFrequency = 45;
+req4 = TuningGoal.Poles(0,MinDamping,MaxFrequency);
+</pre></div></div></div><h3 class="title" id="d124e77211">Control System Tuning<span id="InvertedPendulumExample-8" class="anchor_target"></span></h3><p>The closed-loop system is unstable for the initial values of the PD and state-space controllers (1 and <span class="inlineequation"><span class="inlinemediaobject"><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/InvertedPendulumExample_eq01284253512931479825.png" alt="$2/s$"></span></span>, respectively). You can use <code class="literal">systune</code> to jointly tune these two controllers. Use the <code class="literal">slTuner</code> interface to specify the tunable blocks and register the plant input <code class="literal">F</code> as an analysis point for measuring stability margins.</p><div class="code_responsive"><div class="programlisting"><div class="codeinput"><pre>ST0 = slTuner(<span style="color:#A020F0">'rct_pendulum'</span>,{<span style="color:#A020F0">'Position Controller'</span>,<span style="color:#A020F0">'Angle Controller'</span>});
+addPoint(ST0,<span style="color:#A020F0">'F'</span>);
+</pre></div></div></div><p>Next, use <code class="literal">systune</code> to tune the PD and state-space controllers subject to the performance requirements specified above. Optimize the tracking and disturbance rejection performance (soft requirements) subject to the stability margins and pole location constraints (hard requirements).</p><div class="code_responsive"><div class="programlisting"><div class="codeinput"><pre>rng(0)
+Options = systuneOptions(<span style="color:#A020F0">'RandomStart'</span>,5);
+[ST, fSoft] = systune(ST0,[req1,req2],[req3,req4],Options);
+</pre></div></div></div><div class="code_responsive"><div class="programlisting"><div class="codeoutput"><pre>Final: Soft = 1.37, Hard = 0.99334, Iterations = 268
+Final: Soft = 1.44, Hard = 0.99932, Iterations = 140
+Final: Soft = 1.44, Hard = 0.99832, Iterations = 392
+Final: Soft = 1.26, Hard = 0.99989, Iterations = 297
+Final: Soft = 1.44, Hard = 0.99981, Iterations = 270
+Final: Soft = 1.27, Hard = 0.99904, Iterations = 245
+</pre></div></div></div><p>The best design achieves a value close to 1 for the soft requirements while satisfying the hard requirements (<code class="literal">Hard</code>&lt;1). This means that the tuned control system nearly achieves the target performance for tracking and disturbance rejection while satisfying the stability margins and pole location constraints.</p><h3 class="title" id="d124e77244">Validation<span id="InvertedPendulumExample-11" class="anchor_target"></span></h3><p>Use <code class="literal">viewGoal</code> to further analyze how the best design fares against each requirement.</p><div class="code_responsive"><div class="programlisting"><div class="codeinput"><pre>figure(<span style="color:#A020F0">'Position'</span>,[100   100   575   660])
+viewGoal([req1,req3,req4],ST)
+</pre></div></div></div><div class="informalfigure"><div id="d124e77255" class="mediaobject"><p><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/InvertedPendulumExample_02.png"></p></div></div><p>These plots confirm that the first two requirements are nearly satisfied while the last two are strictly enforced. Next, plot the responses to a step change in position and to a force impulse on the cart.</p><div class="code_responsive"><div class="programlisting"><div class="codeinput"><pre>T = getIOTransfer(ST,{<span style="color:#A020F0">'xref'</span>,<span style="color:#A020F0">'dF'</span>},{<span style="color:#A020F0">'x'</span>,<span style="color:#A020F0">'Theta'</span>});
+figure(<span style="color:#A020F0">'Position'</span>,[100   100   650   420]);
+subplot(121), step(T(:,1),10)
+title(<span style="color:#A020F0">'Tracking of set point change in position'</span>)
+subplot(122), impulse(T(:,2),10)
+title(<span style="color:#A020F0">'Rejection of impulse disturbance'</span>)
+</pre></div></div></div><div class="informalfigure"><div id="d124e77262" class="mediaobject"><p><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/InvertedPendulumExample_03.png"></p></div></div><p>The responses are smooth with the desired settling times. Inspect the tuned values of the controllers.</p><div class="code_responsive"><div class="programlisting"><div class="codeinput"><pre>C1 = getBlockValue(ST,<span style="color:#A020F0">'Position Controller'</span>)
+</pre></div></div></div><div class="code_responsive"><div class="programlisting"><div class="codeoutput"><pre>C1 =
+ 
+               s    
+  Kp + Kd * --------
+             Tf*s+1 
+
+  with Kp = 5.94, Kd = 1.98, Tf = 0.0515
+ 
+Name: Position_Controller
+Continuous-time PDF controller in parallel form.
+
+</pre></div></div></div><div class="code_responsive"><div class="programlisting"><div class="codeinput"><pre>C2 = zpk(getBlockValue(ST,<span style="color:#A020F0">'Angle Controller'</span>))
+</pre></div></div></div><div class="code_responsive"><div class="programlisting"><div class="codeoutput"><pre>C2 =
+ 
+  -1621.1 (s+12.87) (s+4.35)
+  --------------------------
+     (s+135.5) (s-14.35)
+ 
+Name: Angle_Controller
+Continuous-time zero/pole/gain model.
+
+</pre></div></div></div><p>Note that the angle controller has an unstable pole that pairs up with the plant unstable pole to stabilize the inverted pendulum. To see this, get the open-loop transfer at the plant input and plot the root locus.</p><div class="code_responsive"><div class="programlisting"><div class="codeinput"><pre>L = getLoopTransfer(ST,<span style="color:#A020F0">'F'</span>,-1);
+figure
+rlocus(L)
+set(gca,<span style="color:#A020F0">'XLim'</span>,[-25 20],<span style="color:#A020F0">'YLim'</span>,[-20 20])
+</pre></div></div></div><div class="informalfigure"><div id="d124e77279" class="mediaobject"><p><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/InvertedPendulumExample_04.png"></p></div></div><p>To complete the validation, upload the tuned values to Simulink and simulate the nonlinear response of the cart/pendulum assembly. A video of the resulting simulation appears below.</p><div class="code_responsive"><div class="programlisting"><div class="codeinput"><pre>writeBlockValue(ST)
+</pre></div></div></div><p></p>
+<div class="informalfigure"><div id="d124e77287" class="mediaobject"><p><img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/xxpendulum3.gif"></p></div></div><p>
+ </p><p><strong class="emphasis bold">Figure 3: Cart/pendulum simulation with tuned controllers.</strong></p><p>Close the model after simulation.</p><div class="code_responsive"><div class="programlisting"><div class="codeinput"><pre>set_param(<span style="color:#A020F0">'rct_pendulum'</span>,<span style="color:#A020F0">'SimMechanicsOpenEditorOnUpdate'</span>,<span style="color:#A020F0">'on'</span>);
+close_system(<span style="color:#A020F0">'rct_pendulum'</span>,0);
+</pre></div></div></div></div>
+            <h2 id="d124e77300">See Also</h2><p><span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso"><a itemprop="url" href="https://www.mathworks.com/help/slcontrol/ug/sltuner.systune.html"><span itemprop="name"><code class="function">systune</code></span></a> (Simulink Control Design)</span> | <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso"><a itemprop="url" href="https://www.mathworks.com/help/slcontrol/ug/sltuner.html"><span itemprop="name"><code class="function">slTuner</code></span></a> (Simulink Control Design)</span></p>
+            <h2 id="d124e77309">Related Topics</h2><ul><li><a href="https://www.mathworks.com/help/slcontrol/ug/managing-signals-in-analysis-and-design.html" class="a">Mark Signals of Interest for Control System Analysis and Design</a><span role="cross_prod"> (Simulink Control Design)</span></li><li><a href="https://www.mathworks.com/help/slcontrol/ug/example-focused-on-creation-and-configuration-of-sltuner-interface.html" class="a">Create and Configure slTuner Interface to Simulink Model</a><span role="cross_prod"> (Simulink Control Design)</span></li></ul>
+            
+        </section>
+    </div>
+<div class="modal fade" id="open-example-dialog" tabindex="-1" role="dialog" aria-labelledby="openExampleDialogLabel" aria-hidden="true"> 
+  <div class="modal-dialog"> 
+    <div class="modal-content"> 
+      <div class="modal-header"> 
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> 
+        <h2 class="modal-title">Open Example</h2> 
+      </div> 
+      <div class="modal-body" id="dialog-body"> 
+        <p>You have a modified version of this example. Do you want to open this example with your edits?</p> 
+      </div> 
+      <div class="modal-footer"> 
+        <a id="open-example-dialog-replace" class="btn btn_color_blue companion_btn" data-dismiss="modal">No, overwrite the modified version</a>
+        <a id="open-example-dialog-continue" class="btn btn_color_blue" data-dismiss="modal">Yes</a>
+      </div> 
+    </div> 
+  </div> 
+</div>
+<div class="clearfix"></div>
+<div align="center" class="feedbackblock" id="mw_docsurvey" style=""><script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/docfeedback.js.download"></script>
+<script>loadSurveyHidden();</script><div><mw-rating-feedback id="declarative" forwardlabel="Submit" forwardlabelaria="Submit" step="0"><!----><!----><!---->
+            <div role="alert" class="mwRatingFeedback-Hidden" aria-hidden="true" hidden="">
+                <div><!----><span class="glyphicon glyphicon-ok" style="display: inline-block !important; color: #008013"></span>Thank you for your feedback!<!----></div>
+            </div><!---->
+            <div class="mwRatingFeedback-Hidden" aria-hidden="true">
+                <label class="mwRatingFeedback-Label" for="mw_rating_feedback_2"><!---->Why did you choose this rating?<!----></label>
+                <textarea spellcheck="" disabled="" id="mw_rating_feedback_2" class="mwRatingFeedback-Value" name="mw_rating_feedback_2__comment"></textarea>
+                <button disabled="" class="mwRatingFeedback-NextButton" aria-label="Submit"><!---->Submit<!----></button>
+            </div><!---->
+            <div class="" aria-hidden="false">
+                <label class="mwRatingFeedback-Label" id="mw_rating_feedback_1"><!---->How useful was this information?<!----></label>
+                <mw-rating aria-labelledby="mw_rating_feedback_1" class="mwRatingFeedback-Value" name="mw_rating_feedback_1__rating" value="" role="radiogroup" aria-valuenow="" aria-disabled="false" aria-readonly="false"><!----><div class="mwRatingLayout"><div class="mwRatingContainer mwRatingHoverOverride"><!----><!----><input type="radio" class="mwRatingInput" name="mw_rating_feedback_1__rating" id="mw_rating_feedback_1__rating_0" value=""><label class="mwRatingLabel" tabindex="-1" for="mw_rating_feedback_1__rating_0">
+             <span><!---->Unrated<!----></span>
+             </label><!----><input type="radio" class="mwRatingInput" name="mw_rating_feedback_1__rating" id="mw_rating_feedback_1__rating_1" value="1"><label class="mwRatingLabel" tabindex="-1" for="mw_rating_feedback_1__rating_1">
+             <svg aria-hidden="true" focusable="false"><use href="#mw_rating_staricon"></use></svg><span><!---->1 star<!----></span>
+             </label><!----><input type="radio" class="mwRatingInput" name="mw_rating_feedback_1__rating" id="mw_rating_feedback_1__rating_2" value="2"><label class="mwRatingLabel" tabindex="-1" for="mw_rating_feedback_1__rating_2">
+             <svg aria-hidden="true" focusable="false"><use href="#mw_rating_staricon"></use></svg><span><!---->2 stars<!----></span>
+             </label><!----><input type="radio" class="mwRatingInput" name="mw_rating_feedback_1__rating" id="mw_rating_feedback_1__rating_3" value="3"><label class="mwRatingLabel" tabindex="-1" for="mw_rating_feedback_1__rating_3">
+             <svg aria-hidden="true" focusable="false"><use href="#mw_rating_staricon"></use></svg><span><!---->3 stars<!----></span>
+             </label><!----><input type="radio" class="mwRatingInput" name="mw_rating_feedback_1__rating" id="mw_rating_feedback_1__rating_4" value="4"><label class="mwRatingLabel" tabindex="-1" for="mw_rating_feedback_1__rating_4">
+             <svg aria-hidden="true" focusable="false"><use href="#mw_rating_staricon"></use></svg><span><!---->4 stars<!----></span>
+             </label><!----><input type="radio" class="mwRatingInput" name="mw_rating_feedback_1__rating" id="mw_rating_feedback_1__rating_5" value="5"><label class="mwRatingLabel" tabindex="-1" for="mw_rating_feedback_1__rating_5">
+             <svg aria-hidden="true" focusable="false"><use href="#mw_rating_staricon"></use></svg><span><!---->5 stars<!----></span>
+             </label><!----><!----></div><!----></div><!----></mw-rating>
+            </div><!----><!----><!----></mw-rating-feedback></div>
+<link rel="stylesheet" href="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/index-css(1).css" type="text/css">
+<script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/bundle.index.js(1).download"></script>
+
+<script>initDocSurvey();</script></div></section>
+<div class="modal fade" id="matlab-command-dialog" tabindex="-1" role="dialog" aria-labelledby="matlabCommandDialogLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h2 class="modal-title">MATLAB Command</h2>
+      </div>
+      <div class="modal-body" id="dialog-body">
+        <p>You clicked a link that corresponds to this MATLAB command: </p>
+        <pre id="dialog-matlab-command"></pre>
+        <p>Run the command by entering it in the MATLAB Command Window.
+        Web browsers do not support MATLAB commands.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn_secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+<div id="location_content" style="display:none;"></div>
+
+
+<div class="modal fade" id="country-unselected" tabindex="-1" role="dialog" aria-labelledby="country-unselected-title" translate="no">
+<div id="country-select-container">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <img alt="MathWorks" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/pic-header-mathworks-logo2.svg" style="width:167px; height:auto;">
+      </div>
+      <div class="modal-body">
+        <div class="row add_margin_40">
+          <div class="col-xs-12">
+            <h1 class="icon-globe icon_color_secondary" id="country-unselected-title">Select a Web Site</h1>
+            <p>Choose a web site to get translated content where available and see local events and offers. Based on your location, we recommend that you select: <strong class="recommended-country">United States</strong>.</p>
+						<div class="default-recommendation">
+							<a href="https://www.mathworks.com/" id="recommended_domain_button" class="btn btn_color_blue containsResourceName resourceClass-button" data-lang="en"><span class="recommended-country">United States</span></a>
+						</div>
+						<div class="ch-recommendation" style="display:none;">
+							<ul class="list-inline">
+								<li class="add_display_block_xs add_margin_10_xs"><a href="https://ch.mathworks.com/" class="recommendation-button btn btn_color_blue btn-md add_display_block_xs" data-subdomain="ch" data-lang="en" data-recommended-text="Switzerland" data-default-lang="true" data-do-not-rewrite="true" x-cq-linkchecker="skip">Switzerland (English)</a></li>
+								<li class="add_display_block_xs add_margin_10_xs"><a href="https://ch.mathworks.com/" class="recommendation-button btn companion_btn btn-md add_display_block_xs" data-subdomain="ch" data-lang="de" data-recommended-text="Schweiz" data-do-not-rewrite="true" x-cq-linkchecker="skip">Switzerland (Deutsch)</a></li>
+								<li class="add_display_block_xs"><a href="https://ch.mathworks.com/" class="recommendation-button btn companion_btn btn-md add_display_block_xs" data-subdomain="ch" data-lang="fr" data-recommended-text="Suisse" data-do-not-rewrite="true" x-cq-linkchecker="skip">Switzerland (Français)</a></li>
+							</ul>
+						</div>
+						<div class="zh-recommendation" style="display:none;">
+							<ul class="list-inline">
+								<li class="add_display_block_xs add_margin_10_xs"><a href="https://ww2.mathworks.cn/" class="recommendation-button btn btn_color_blue btn-md add_display_block_xs" data-subdomain="ww2" data-lang="zh" data-recommended-text="中国" data-default-lang="true" data-do-not-rewrite="true" x-cq-linkchecker="skip">中国 (简体中文)</a></li>
+								<li class="add_display_block_xs"><a href="https://ww2.mathworks.cn/" class="recommendation-button btn companion_btn btn-md add_display_block_xs" data-subdomain="ww2" data-lang="en" data-recommended-text="China" data-do-not-rewrite="true" x-cq-linkchecker="skip">中国 (English)</a></li>
+							</ul>
+						</div>
+          </div>
+        </div>
+        <p>You can also select a web site from the following list:</p>
+				<div class="alert alert-warning" id="china_performance_alert" style="display:none;"> <span class="alert_icon icon-alert-warning"></span>
+					<h2>How to Get Best Site Performance</h2>
+					<p>Select the China site (in Chinese or English) for best site performance. Other MathWorks country sites are not optimized for visits from your location.</p>
+				</div>
+        <div class="row add_margin_30">
+          <div class="col-sm-4 col-md-3">
+            <h3 class="add_bottom_rule">Americas</h3>
+            <ul class="list-unstyled">
+              <li><a href="https://la.mathworks.com/" class="domain_selector_link" data-country-code="LA" data-subdomain="la" data-lang="es" data-default-lang="true" data-selected-text="América Latina" data-recommended-text="América Latina" data-do-not-rewrite="true">América Latina</a> (Español)</li>
+              <li><a href="https://www.mathworks.com/" class="domain_selector_link" data-country-code="CA" data-subdomain="www" data-lang="en" data-do-not-rewrite="true">Canada</a> (English)</li>
+              <li><a href="https://www.mathworks.com/" class="domain_selector_link" data-country-code="US" data-subdomain="www" data-lang="en" data-default-lang="true" data-selected-text="United States" data-recommended-text="United States" data-do-not-rewrite="true">United States</a> (English)</li>
+            </ul>
+          </div>
+          <div class="col-sm-4 col-md-6">
+            <h3 class="add_bottom_rule">Europe</h3>
+            <div class="row">
+              <div class="col-xs-6 col-sm-12 col-md-6">
+                <ul class="list-unstyled add_margin_0_sm">
+                  <li><a href="https://nl.mathworks.com/" class="domain_selector_link" data-country-code="BE" data-subdomain="nl" data-lang="en" data-do-not-rewrite="true">Belgium</a> (English)</li>
+                  <li><a href="https://se.mathworks.com/" class="domain_selector_link" data-country-code="DK" data-subdomain="se" data-lang="en" data-do-not-rewrite="true">Denmark</a> (English)</li>
+                  <li><a href="https://de.mathworks.com/" class="domain_selector_link" data-country-code="DE" data-subdomain="de" data-lang="de" data-default-lang="true" data-selected-text="Deutschland" data-recommended-text="Deutschland" data-do-not-rewrite="true">Deutschland</a> (Deutsch)</li>
+                  <li><a href="https://es.mathworks.com/" class="domain_selector_link" data-country-code="ES" data-subdomain="es" data-lang="es" data-default-lang="true" data-selected-text="España" data-recommended-text="España" data-do-not-rewrite="true">España</a> (Español)</li>
+                  <li><a href="https://se.mathworks.com/" class="domain_selector_link" data-country-code="FI" data-subdomain="se" data-lang="en" data-do-not-rewrite="true">Finland</a> (English)</li>
+                  <li><a href="https://fr.mathworks.com/" class="domain_selector_link" data-country-code="FR" data-subdomain="fr" data-lang="fr" data-default-lang="true" data-selected-text="France" data-recommended-text="France" data-do-not-rewrite="true">France</a> (Français)</li>
+                  <li><a href="https://uk.mathworks.com/" class="domain_selector_link" data-country-code="IE" data-subdomain="uk" data-lang="en" data-do-not-rewrite="true">Ireland</a> (English)</li>
+                  <li><a href="https://it.mathworks.com/" class="domain_selector_link" data-country-code="IT" data-subdomain="it" data-lang="it" data-default-lang="true" data-selected-text="Italia" data-recommended-text="Italia" data-do-not-rewrite="true">Italia</a> (Italiano)</li>
+                  <li><a href="https://nl.mathworks.com/" class="domain_selector_link" data-country-code="LU" data-subdomain="nl" data-lang="en" data-do-not-rewrite="true">Luxembourg</a> (English)</li>
+                </ul>
+              </div>
+              <div class="col-xs-6 col-sm-12 col-md-6">
+                <ul class="list-unstyled">
+                  <li><a href="https://nl.mathworks.com/" class="domain_selector_link" data-country-code="NL" data-subdomain="nl" data-lang="en" data-default-lang="true" data-selected-text="Benelux" data-recommended-text="Netherlands" data-do-not-rewrite="true">Netherlands</a> (English)</li>
+                  <li><a href="https://se.mathworks.com/" class="domain_selector_link" data-country-code="NO" data-subdomain="se" data-lang="en" data-do-not-rewrite="true">Norway</a> (English)</li>
+                  <li><a href="https://de.mathworks.com/" class="domain_selector_link" data-country-code="AT" data-subdomain="de" data-lang="de" data-do-not-rewrite="true">Österreich</a> (Deutsch)</li>
+                  <li><a href="https://www.mathworks.com/" class="domain_selector_link" data-country-code="PT" data-subdomain="www" data-lang="en" data-do-not-rewrite="true">Portugal</a> (English)</li>
+                  <li><a href="https://se.mathworks.com/" class="domain_selector_link" data-country-code="Sweden" data-subdomain="se" data-lang="en" data-default-lang="true" data-selected-text="Nordic" data-recommended-text="Sweden" data-do-not-rewrite="true">Sweden</a> (English)</li>
+                  <li>Switzerland
+                    <ul class="list-unstyled add_indent_20">
+                      <li><a href="https://ch.mathworks.com/" class="domain_selector_link" data-country-code="CH" data-subdomain="ch" data-lang="de" data-selected-text="Schweiz" data-recommended-text="Schweiz" data-do-not-rewrite="true">Deutsch</a></li>
+                      <li><a href="https://ch.mathworks.com/" id="swiss_english" class="domain_selector_link" data-country-code="CH" data-subdomain="ch" data-lang="en" data-default-lang="true" data-selected-text="Switzerland" data-recommended-text="Switzerland" data-do-not-rewrite="true">English</a></li>
+                      <li><a href="https://ch.mathworks.com/" class="domain_selector_link" data-country-code="CH" data-subdomain="ch" data-lang="fr" data-selected-text="Suisse" data-recommended-text="Suisse" data-do-not-rewrite="true">Français</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="https://uk.mathworks.com/" class="domain_selector_link" data-country-code="GB" data-subdomain="uk" data-lang="en" data-default-lang="true" data-selected-text="United Kingdom" data-recommended-text="United Kingdom" data-do-not-rewrite="true">United Kingdom</a> (English)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4 col-md-3">
+            <h3 class="add_bottom_rule">Asia Pacific</h3>
+            <ul class="list-unstyled">
+              <li><a href="https://au.mathworks.com/" class="domain_selector_link" data-country-code="AU" data-subdomain="au" data-lang="en" data-default-lang="true" data-selected-text="Australia" data-recommended-text="Australia" data-do-not-rewrite="true">Australia</a> (English)</li>
+              <li><a href="https://in.mathworks.com/" class="domain_selector_link" data-country-code="IN" data-subdomain="in" data-lang="en" data-default-lang="true" data-selected-text="India" data-recommended-text="India" data-do-not-rewrite="true">India</a> (English)</li>
+              <li><a href="https://au.mathworks.com/" class="domain_selector_link" data-country-code="NZ" data-subdomain="au" data-lang="en" data-do-not-rewrite="true">New Zealand</a> (English)</li>
+              <li>中国
+                    <ul class="list-unstyled add_indent_20">
+                      <li><a href="https://ww2.mathworks.cn/" class="domain_selector_link" data-country-code="CN" data-subdomain="ww2" data-lang="zh" data-default-lang="true" data-selected-text="中国" data-recommended-text="中国" data-do-not-rewrite="true">简体中文</a></li>
+                      <li><a href="https://ww2.mathworks.cn/" class="domain_selector_link" data-country-code="CN" data-subdomain="ww2" data-lang="en" data-default-lang="true" data-selected-text="China" data-recommended-text="China" data-do-not-rewrite="true">English</a></li>
+                    </ul>
+               </li>
+              <li><a href="https://jp.mathworks.com/" class="domain_selector_link" data-country-code="JP" data-subdomain="jp" data-lang="ja" data-default-lang="true" data-selected-text="日本" data-recommended-text="日本" data-do-not-rewrite="true">日本</a> (日本語)</li>
+              <li><a href="https://kr.mathworks.com/" class="domain_selector_link" data-country-code="KR" data-subdomain="kr" data-lang="ko" data-default-lang="true" data-selected-text="한국" data-recommended-text="한국" data-do-not-rewrite="true">한국</a> (한국어)</li>
+            </ul>
+          </div>
+        </div>
+        <p class="text-center"><a href="https://www.mathworks.com/" class="worldwide_link">Contact your local office</a></p>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+  
+
+              </main>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MOBILE CTA - Begin -->
+      <div class="cta_container_mobile visible-sm visible-xs" style="width: auto;">
+        <div class="container-fluid">      
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="cta_box">
+<ul class="list-inline">
+<li class="cta_item cta_item_general hidden-sm hidden-xs "><a href="https://www.mathworks.com/campaigns/products/trials.html?prodcode=CT&amp;s_iid=doc_trial_CT_tb" class="icon-download">Trial Software</a></li>
+<li class="hidden-lg hidden-md "><a href="https://www.mathworks.com/campaigns/products/trials.html?prodcode=CT&amp;s_iid=doc_trial_CT_tb" class="btn btn_color_blue btn-block"><span class="icon-download"></span> Trial Software</a></li>
+<li class="cta_item cta_item_general hidden-sm hidden-xs "><a href="https://www.mathworks.com/support/web_downloads_bounce.html?s_cid=1008_degr_docdn_270055" class="icon-download">Product Updates</a></li>
+<li class="hidden-lg hidden-md "><a href="https://www.mathworks.com/support/web_downloads_bounce.html?s_cid=1008_degr_docdn_270055" class="btn btn_color_blue btn-block"><span class="icon-download"></span> Product Updates</a></li>
+</ul>
+</div> 
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- MOBILE CTA - End -->
+
+
+      <footer id="footer" class="bs-footer" style="width: auto;">
+          <!-- FAT FOOTER - Begin --> 
+          <div class="container-fluid">
+            <div class="fat_footer_container">
+              <div class="fat_footer">
+<div class="execmatlabweb"> <!--Requried for Doc Test -->
+<div class="row">
+<div class="col-xs-12 col-md-12 col-lg-3 add_margin_20">
+<p class="h4 add_margin_0"><span translate="no">MathWorks</span></p>
+<p><em>Accelerating the pace of engineering and science</em></p>
+<p class="hidden-xs"><span translate="no">MathWorks</span> is the leading developer of mathematical computing software for engineers and scientists.</p>
+<p class="hidden-xs"><a href="https://www.mathworks.com/discovery.html?s_tid=all_disc_mw_ff">Discover...</a></p>
+</div>
+<div class="col-xs-12 col-md-12 col-lg-9">
+<div class="row">
+<div class="col-xs-12 col-sm-2">
+<p class="ff_section_title"><a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#fatfooter_products" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="fatfooter_products">Explore Products <span class="caret"></span></a></p>
+<div class="collapse" id="fatfooter_products">
+<ul class="list-unstyled">
+<li><a href="https://www.mathworks.com/products/matlab.html?s_tid=hp_ff_p_matlab">MATLAB</a></li>
+<li><a href="https://www.mathworks.com/products/simulink.html?s_tid=hp_ff_p_simulink">Simulink</a></li>
+<li><a href="https://www.mathworks.com/products/matlab/student.html?s_tid=hp_ff_p_student">Student Software</a></li>
+<li><a href="https://www.mathworks.com/hardware-support/home.html?s_tid=hp_ff_p_hwsupport">Hardware Support</a></li>
+<li><a href="https://www.mathworks.com/matlabcentral/fileexchange/?s_tid=hp_ff_p_fx">File Exchange</a></li>
+</ul>
+</div>
+</div>
+<div class="col-xs-12 col-sm-2">
+<p class="ff_section_title"><a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#fatfooter_buy" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="fatfooter_buy">Try or Buy <span class="caret"></span></a></p>
+<div class="collapse" id="fatfooter_buy">
+<ul class="list-unstyled">
+<li><a href="https://www.mathworks.com/downloads/web_downloads/?s_iid=hp_ff_t_downloads">Downloads</a></li>
+<li><a href="https://www.mathworks.com/campaigns/products/trials.html?s_iid=hp_ff_p_trial">Trial Software</a></li>
+<li><a href="https://www.mathworks.com/company/aboutus/contact_us/contact_sales.html?s_iid=hp_ff_t_sales">Contact Sales</a></li>
+<li><a href="https://www.mathworks.com/pricing-licensing.html?s_iid=hp_ff_t_pricing">Pricing and Licensing</a></li>
+<li><a href="https://www.mathworks.com/store/?s_tid=hp_ff_t_buy">How to Buy</a></li>
+</ul>
+</div>
+</div>
+<div class="col-xs-12 col-sm-2">
+<p class="ff_section_title"><a role="button" data-toggle="collapse" href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#fatfooter_use" aria-expanded="false" aria-controls="fatfooter_use">Learn to Use <span class="caret"></span></a></p>
+<div class="collapse" id="fatfooter_use">
+<ul class="list-unstyled">
+<li><a href="https://www.mathworks.com/help/?s_tid=hp_ff_l_doc">Documentation</a></li>
+<li><a href="https://www.mathworks.com/support/learn-with-matlab-tutorials.html?s_tid=hp_ff_l_tutorials">Tutorials</a></li>
+<li><a href="https://www.mathworks.com/help/examples.html?s_tid=hp_ff_l_examples">Examples</a></li>
+<li><a href="https://www.mathworks.com/videos.html?s_tid=hp_ff_l_videos">Videos and Webinars</a></li>
+<li><a href="https://www.mathworks.com/learn/training.html?s_tid=hp_ff_l_training">Training</a></li>
+</ul>
+</div>
+</div>
+<div class="clearfix" id="offcanvas_clearfix" style="display:none"></div>
+<div class="col-xs-12 col-sm-2">
+<p class="ff_section_title"><a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#fatfooter_support" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="fatfooter_support">Get Support <span class="caret"></span></a></p>
+<div class="collapse" id="fatfooter_support">
+<ul class="list-unstyled">
+<li><a href="https://www.mathworks.com/help/install/?s_tid=hp_ff_s_install">Installation Help</a></li>
+<li><a href="https://www.mathworks.com/matlabcentral/answers/index?s_tid=hp_ff_s_answers">Answers</a></li>
+<li><a href="https://www.mathworks.com/services/consulting.html?s_tid=hp_ff_s_consulting">Consulting</a></li>
+<li><a href="https://www.mathworks.com/licensecenter/?s_tid=hp_ff_s_license">License Center</a></li>
+<li><a href="https://www.mathworks.com/support/contact_us.html?s_tid=hp_ff_s_support">Contact Support</a></li>
+</ul>
+</div>
+</div>
+<div class="col-xs-12 col-sm-2">
+<p class="ff_section_title"><a role="button" data-toggle="collapse" href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#fatfooter_about" aria-expanded="false" aria-controls="fatfooter_about">About <span translate="no">MathWorks</span> <span class="caret"></span></a></p>
+<div class="collapse" id="fatfooter_about">
+<ul class="list-unstyled">
+<li><a href="https://www.mathworks.com/company/jobs/opportunities.html?s_tid=hp_ff_a_careers">Careers</a></li>
+<li><a href="https://www.mathworks.com/company/newsroom.html?s_tid=hp_ff_a_newsroom">Newsroom</a></li>
+<li><a href="https://www.mathworks.com/company/aboutus/soc_mission.html?s_tid=hp_ff_a_socialmission">Social Mission</a></li>
+<li><a href="https://www.mathworks.com/company/customer-stories.html?s_tid=hp_ff_a_customerstories">Customer Stories</a></li>
+<li><a href="https://www.mathworks.com/company.html?s_tid=hp_ff_a_company">About <span translate="no">MathWorks</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+            </div>
+          </div>
+          <!-- FAT FOOTER - End -->
+        <div class="container-fluid">
+         <div class="footer" translate="no">
+<div class="row">
+<div class="col-xs-12 col-md-9">
+<ul class="countrynav" id="countrynav">
+<li class="footernav_country">
+<a href="https://www.mathworks.com/help/control/ug/control-of-an-inverted-pendulum-on-a-cart.html#" data-toggle="modal" data-target="#country-unselected">
+<span class="icon-globe icon_color_quinary icon_16"></span>United States
+</a>
+</li>
+</ul>
+<div class="clearfix"></div>
+<ul class="footernav">
+<li class="footernav_patents"><a href="https://www.mathworks.com/company/aboutus/policies_statements/trust-center.html?s_tid=gf_tc">Trust Center</a></li>
+<li class="footernav_trademarks"><a href="https://www.mathworks.com/company/aboutus/policies_statements/trademarks.html?s_tid=gf_trd">Trademarks</a></li>
+<li class="footernav_privacy"><a href="https://www.mathworks.com/company/aboutus/policies_statements.html?s_tid=gf_priv">Privacy Policy</a></li>
+<li class="footernav_piracy"><a href="https://www.mathworks.com/company/aboutus/policies_statements/piracy.html?s_tid=gf_pir">Preventing Piracy</a></li>
+<li class="footernav_status"><a href="https://status.mathworks.com/?s_tid=gf_application">Application Status</a></li>
+</ul>
+<div class="clearfix"></div>
+<div class="clearfix"></div>
+<p class="copyright" translate="no">© 1994-2023 The MathWorks, Inc.</p>
+</div>
+<div class="clearfix visible-sm add_margin_10"></div>
+<div class="col-xs-12 col-md-3">
+<div class="social_media">
+<ul class="social_media_icons">
+<li>
+<a href="https://www.facebook.com/MATLAB" target="_blank" rel="nofollow noopener noreferrer" class="svg_link">
+<img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-facebook.svg" alt="Facebook" class="ico_facebook">
+</a>
+</li>
+<li>
+<a href="https://twitter.com/MATLAB" target="_blank" rel="nofollow noopener noreferrer" class="svg_link">
+<img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-twitter.svg" alt="Twitter" class="ico_twitter">
+</a>
+</li>
+<li>
+<a href="https://www.instagram.com/matlab/" class="svg_link" target="_blank" rel="nofollow noopener noreferrer">
+<img class="ico_instagram" alt="Instagram" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-instagram.svg">
+</a>
+</li>
+<li>
+<a href="https://www.youtube.com/user/MATLAB" class="svg_link" target="_blank" rel="nofollow noopener noreferrer">
+<img class="ico_youtube" alt="YouTube" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-youtube.svg">
+</a>
+</li>
+<li>
+<a href="https://www.linkedin.com/company/the-mathworks_2" target="_blank" rel="nofollow noopener noreferrer" class="svg_link">
+<img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-linkedin.svg" alt="LinkedIn" class="ico_linkedin">
+</a>
+</li>
+<li>
+<a href="https://www.mathworks.com/company/rss.html" class="svg_link">
+<img src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/ico-rss.svg" alt="RSS" class="ico_rss">
+</a>
+</li>
+</ul>
+<div class="clearfix"></div>
+<p><em>Join the conversation</em></p>
+</div>
+</div>
+</div>
+</div>
+        </div>
+      </footer>
+
+    </div>
+  
+  </div><div style="display: none;"><!----><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+    <symbol viewBox="-1 -1 18 18" id="mw_rating_staricon">
+    <path d="M5 6h-5l4 4-1 6 5-4 5 4-1-6 4-4h-5l-3-6z"></path>
+    </symbol>
+    </svg><!----></div>
+
+
+<!-- CRUX 2.0 -->
+<script src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/crux_nav_truncate.js.download"></script>
+
+<!-- Mirror Search Queries on Scope Change : g2611494 -->
+<script>
+$('#search_scope_support').on('show.bs.collapse', function () {
+  if ($('#search_scope_site #query').val()) {
+    var site_search_value = $('#search_scope_site #query').val();
+    $('#search_scope_support #docsearch').val(site_search_value); 
+  }
+})
+$('#search_scope_site').on('show.bs.collapse', function () {
+  if ($('#search_scope_support #docsearch').val()) {
+    var support_search_value = $('#search_scope_support #docsearch').val();
+    $('#search_scope_site #query').val(support_search_value); 
+  }  
+})
+</script>
+<noscript><img src="https://www.mathworks.com/akam/13/pixel_74b07353?a=dD05YWM1MWU0YTUzMzI0NGM3OWFhODdiMGRkZmVlNzllNGUzNTVhY2RiJmpzPW9mZg==" style="visibility: hidden; position: absolute; left: -999px; top: -999px;" /></noscript><script type="text/javascript" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/JjDzk"></script><script>
+(function() {
+  var host = 'mathworks.com';
+  var element = document.createElement('script');
+  var firstScript = document.getElementsByTagName('script')[0];
+  var url = 'https://cmp.quantcast.com'
+    .concat('/choice/', 'zfNtLVVEHXE-1', '/', host, '/choice.js?tag_version=V2');
+  var uspTries = 0;
+  var uspTriesLimit = 3;
+  element.async = true;
+  element.type = 'text/javascript';
+  element.src = url;
+
+  firstScript.parentNode.insertBefore(element, firstScript);
+
+  function makeStub() {
+    var TCF_LOCATOR_NAME = '__tcfapiLocator';
+    var queue = [];
+    var win = window;
+    var cmpFrame;
+
+    function addFrame() {
+      var doc = win.document;
+      var otherCMP = !!(win.frames[TCF_LOCATOR_NAME]);
+
+      if (!otherCMP) {
+        if (doc.body) {
+          var iframe = doc.createElement('iframe');
+
+          iframe.style.cssText = 'display:none';
+          iframe.name = TCF_LOCATOR_NAME;
+          doc.body.appendChild(iframe);
+        } else {
+          setTimeout(addFrame, 5);
+        }
+      }
+      return !otherCMP;
+    }
+
+    function tcfAPIHandler() {
+      var gdprApplies;
+      var args = arguments;
+
+      if (!args.length) {
+        return queue;
+      } else if (args[0] === 'setGdprApplies') {
+        if (
+          args.length > 3 &&
+          args[2] === 2 &&
+          typeof args[3] === 'boolean'
+        ) {
+          gdprApplies = args[3];
+          if (typeof args[2] === 'function') {
+            args[2]('set', true);
+          }
+        }
+      } else if (args[0] === 'ping') {
+        var retr = {
+          gdprApplies: gdprApplies,
+          cmpLoaded: false,
+          cmpStatus: 'stub'
+        };
+
+        if (typeof args[2] === 'function') {
+          args[2](retr);
+        }
+      } else {
+        if(args[0] === 'init' && typeof args[3] === 'object') {
+          args[3] = Object.assign(args[3], { tag_version: 'V2' });
+        }
+        queue.push(args);
+      }
+    }
+
+    function postMessageEventHandler(event) {
+      var msgIsString = typeof event.data === 'string';
+      var json = {};
+
+      try {
+        if (msgIsString) {
+          json = JSON.parse(event.data);
+        } else {
+          json = event.data;
+        }
+      } catch (ignore) {}
+
+      var payload = json.__tcfapiCall;
+
+      if (payload) {
+        window.__tcfapi(
+          payload.command,
+          payload.version,
+          function(retValue, success) {
+            var returnMsg = {
+              __tcfapiReturn: {
+                returnValue: retValue,
+                success: success,
+                callId: payload.callId
+              }
+            };
+            if (msgIsString) {
+              returnMsg = JSON.stringify(returnMsg);
+            }
+            if (event && event.source && event.source.postMessage) {
+              event.source.postMessage(returnMsg, '*');
+            }
+          },
+          payload.parameter
+        );
+      }
+    }
+
+    while (win) {
+      try {
+        if (win.frames[TCF_LOCATOR_NAME]) {
+          cmpFrame = win;
+          break;
+        }
+      } catch (ignore) {}
+
+      if (win === window.top) {
+        break;
+      }
+      win = win.parent;
+    }
+    if (!cmpFrame) {
+      addFrame();
+      win.__tcfapi = tcfAPIHandler;
+      win.addEventListener('message', postMessageEventHandler, false);
+    }
+  }
+
+  makeStub();
+
+  var uspStubFunction = function() {
+    var arg = arguments;
+    if (typeof window.__uspapi !== uspStubFunction) {
+      setTimeout(function() {
+        if (typeof window.__uspapi !== 'undefined') {
+          window.__uspapi.apply(window.__uspapi, arg);
+        }
+      }, 500);
+    }
+  };
+
+  var checkIfUspIsReady = function() {
+    uspTries++;
+    if (window.__uspapi === uspStubFunction && uspTries < uspTriesLimit) {
+      console.warn('USP is not accessible');
+    } else {
+      clearInterval(uspInterval);
+    }
+  };
+
+  if (typeof window.__uspapi === 'undefined') {
+    window.__uspapi = uspStubFunction;
+    var uspInterval = setInterval(checkIfUspIsReady, 6000);
+  }
+})();
+
+//API call and event listener callback 
+__tcfapi('addEventListener', 2, function (tcData, success) {
+    var server = window.location.hostname;
+    var google = false;
+    var facebook = false;
+    var quantcast = false;
+    var twitter = false;
+    var twitterJapan = false;
+    var adCloud = false;
+    var linkedIn = false;
+    var yahoo = false;
+    var across = false;
+    var baidu = false;
+    var weChat = false;
+    var researchGate = false;
+    var terminus = false;
+    var fancyDigital = false;
+    var quora = false;
+    var appcast = false;
+    var consentResult = false;
+    var liResult = false;
+
+    //set services by domain
+    if (server.indexOf('ww2-') == -1 && server.indexOf('ww2.') == -1) {
+        google = true;
+        facebook = true;
+        adCloud = true;
+        terminus = true;
+    }
+    if (server.indexOf('ww2-') == -1 && server.indexOf('ww2.') == -1 && server.indexOf('in-') == -1 && server.indexOf('in.') == -1) {
+        quantcast = true;
+    }
+
+    if (server.indexOf('ww2-') == -1 && server.indexOf('ww2.') == -1 && server.indexOf('kr-') == -1 && server.indexOf('kr.') && server.indexOf('jp-') == -1 && server.indexOf('jp.') == -1) {
+        twitter = true;
+        linkedIn = true;
+    }
+
+    if (server.indexOf('matlabacademy-') > -1 || server.indexOf('matlabacademy.') > -1) {
+        quora = true;
+    }
+    if (server.indexOf('www-test') > -1 || server.indexOf('www-stage') > -1 || server.indexOf('www-integ') > -1 || server.indexOf('www.') > -1) {
+        quora = true;
+        appcast = true;
+    }
+    if (server.indexOf('jp-test') > -1 || server.indexOf('jp-stage') > -1 || server.indexOf('jp-integ') > -1 || server.indexOf('jp.') > -1) {
+        yahoo = true;
+        twitterJapan = true;
+    }
+    if (server.indexOf('ww2-test') > -1 || server.indexOf('ww2-stage') > -1 || server.indexOf('ww2-integ') > -1 || server.indexOf('ww2.') > -1) {
+        baidu = true;
+        weChat = true;
+        fancyDigital = true;
+    }
+    if (server.indexOf('kr-test') > -1 || server.indexOf('kr-stage') > -1 || server.indexOf('kr-integ') > -1 || server.indexOf('kr.') > -1) {
+        across = true;
+    }
+
+    //determine if CMP loaded,what consent status is,call scripts 
+    if (success) {
+        if (tcData.gdprApplies) {
+            if (tcData.eventStatus === 'tcloaded') {
+                if ('1' in tcData.purpose.consents && tcData.purpose.consents[10] === true) {
+                    for (i = 1; i < 6; i++) {
+                        if (tcData.purpose.consents[i] === false) {
+                            consentResult = false;
+                            break;
+                        } else {
+                            consentResult = true;
+                        }
+                    }
+                }
+
+                if ('1' in tcData.purpose.legitimateInterests && tcData.purpose.legitimateInterests[2] && tcData.purpose.legitimateInterests[5] && tcData.purpose.legitimateInterests[10]) {
+                    liResult = 'true';
+                }
+                //fire scripts here
+                if ((consentResult) && (liResult)) { localStorage.setItem('cmpConsent', 'true'); }
+                if ((consentResult) && (liResult) && (google)) { _satellite.track('googleBase'); }
+                if ((consentResult) && (liResult) && (facebook)) { _satellite.track('facebookBase'); }
+                if ((consentResult) && (liResult) && (quantcast)) { _satellite.track('quantcastBase'); }
+                if ((consentResult) && (liResult) && (adCloud)) { _satellite.track('adCloudBase'); }
+                if ((consentResult) && (liResult) && (twitter)) { _satellite.track('twitterBase'); }
+                if ((consentResult) && (liResult) && (researchGate)) { _satellite.track('researchGateBase'); }
+                if ((consentResult) && (liResult) && (terminus)) { _satellite.track('terminusBase'); }
+                if ((consentResult) && (liResult) && (linkedIn)) { _satellite.track('linkedInBase'); }
+                if ((consentResult) && (liResult) && (twitterJapan)) { _satellite.track('twitterBaseJapan'); }
+                if ((consentResult) && (liResult) && (yahoo)) { _satellite.track('yahooBase'); }
+                if ((consentResult) && (liResult) && (across)) { _satellite.track('acrossBase'); }
+                if ((consentResult) && (liResult) && (baidu)) { _satellite.track('baiduBase'); }
+                if ((consentResult) && (liResult) && (weChat)) { _satellite.track('weChatBase'); }
+                if ((consentResult) && (liResult) && (fancyDigital)) { _satellite.track('fancyDigitalBase'); }
+                if ((consentResult) && (liResult) && (quora)) { _satellite.track('quoraBase'); }
+                if ((consentResult) && (liResult) && (appcast)) { _satellite.track('appcastBase'); }
+
+            } else if (tcData.eventStatus === 'useractioncomplete') {
+                if ('1' in tcData.purpose.consents && tcData.purpose.consents[10] === true) {
+                    for (i = 1; i < 6; i++) {
+                        if (tcData.purpose.consents[i] === false) {
+                            consentResult = false;
+                            break;
+                        } else {
+                            consentResult = true;
+                        }
+                    }
+                }
+
+                if ('1' in tcData.purpose.legitimateInterests && tcData.purpose.legitimateInterests[2] && tcData.purpose.legitimateInterests[5] && tcData.purpose.legitimateInterests[10]) {
+                    liResult = 'true';
+                }
+                //fire scripts here
+                if ((consentResult) && (liResult)) { localStorage.setItem('cmpConsent', 'true'); }
+                if ((consentResult) && (liResult) && (google)) { _satellite.track('googleBase'); }
+                if ((consentResult) && (liResult) && (facebook)) { _satellite.track('facebookBase'); }
+                if ((consentResult) && (liResult) && (quantcast)) { _satellite.track('quantcastBase'); }
+                if ((consentResult) && (liResult) && (adCloud)) { _satellite.track('adCloudBase'); }
+                if ((consentResult) && (liResult) && (twitter)) { _satellite.track('twitterBase'); }
+                if ((consentResult) && (liResult) && (researchGate)) { _satellite.track('researchGateBase'); }
+                if ((consentResult) && (liResult) && (terminus)) { _satellite.track('terminusBase'); }
+                if ((consentResult) && (liResult) && (twitterJapan)) { _satellite.track('twitterBaseJapan'); }
+                if ((consentResult) && (liResult) && (linkedIn)) { _satellite.track('linkedInBase'); }
+                if ((consentResult) && (liResult) && (yahoo)) { _satellite.track('yahooBase'); }
+                if ((consentResult) && (liResult) && (across)) { _satellite.track('acrossBase'); }
+                if ((consentResult) && (liResult) && (baidu)) { _satellite.track('baiduBase'); }
+                if ((consentResult) && (liResult) && (weChat)) { _satellite.track('weChatBase'); }
+                if ((consentResult) && (liResult) && (fancyDigital)) { _satellite.track('fancyDigitalBase'); }
+                if ((consentResult) && (liResult) && (quora)) { _satellite.track('quoraBase'); }
+                if ((consentResult) && (liResult) && (appcast)) { _satellite.track('appcastBase'); }
+                
+            } else {
+                // print a debug error message to the console
+            }
+        } else { /* gdpr does not apply */
+            // Most likely you want to make the ad request in this case 
+            localStorage.setItem('cmpConsent', 'true');
+            if (google) { _satellite.track('googleBase'); }
+            if (facebook) { _satellite.track('facebookBase'); }
+            if (quantcast) { _satellite.track('quantcastBase'); }
+            if (adCloud) { _satellite.track('adCloudBase'); }
+            if (twitter) { _satellite.track('twitterBase'); }
+            if (researchGate) { _satellite.track('researchGateBase'); }
+            if (terminus) { _satellite.track('terminusBase'); }
+            if (twitterJapan) { _satellite.track('twitterBaseJapan'); }
+            if (linkedIn) { _satellite.track('linkedInBase'); }
+            if (yahoo) { _satellite.track('yahooBase'); }
+            if (across) { _satellite.track('acrossBase'); }
+            if (baidu) { _satellite.track('baiduBase'); }
+            if (weChat) { _satellite.track('weChatBase'); }
+            if (fancyDigital) { _satellite.track('fancyDigitalBase'); }
+            if (quora) { _satellite.track('quoraBase'); }
+            if ((appcast)) { _satellite.track('appcastBase'); }
+        }
+    }
+})
+</script><iframe name="__tcfapiLocator" style="display: none;" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/saved_resource(1).html"></iframe><script>
+var _elqQ = _elqQ || [];
+_elqQ.push(["elqSetSiteId", "646005169"]), _elqQ.push(["elqUseFirstPartyCookie", "tracking.mathworks.com"]), _elqQ.push(["elqTrackPageView", window.location.href]),
+  function() {
+    function e() {
+      var e = document.createElement("script");
+      e.type = "text/javascript", e.async = !0, e.src = "//img03.en25.com/i/elqCfg.min.js";
+      var t = document.getElementsByTagName("script")[0];
+      t.parentNode.insertBefore(e, t)
+    }
+    e()
+  }();
+</script>
+<a class="btn btn_color_mediumgray" id="go-top" style="display: block;"><span class="icon-arrow-open-up icon_24"></span></a><script type="text/javascript" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/main.min.js.download"></script><script>_satellite["_runScript1"](function(event, target, Promise) {
+_satellite.cookie.set("_sdsat_eid",_satellite.getVar('eid'),1);
+});</script><script>_satellite["_runScript2"](function(event, target, Promise) {
+var _kiq=_kiq||[];_kiq.push(["enableAccessibilityMode"]),setTimeout((function(){var e=document,t=e.getElementsByTagName("script")[0],s=e.createElement("script");s.type="text/javascript",s.async=!0,s.src="https://cl.qualaroo.com/ki.js/49559/ahy.js",t.parentNode.insertBefore(s,t)}),1);
+});</script><script>_satellite["_runScript3"](function(event, target, Promise) {
+!function(e,t,n,c,o,a,f){e.fbq||(o=e.fbq=function(){o.callMethod?o.callMethod.apply(o,arguments):o.queue.push(arguments)},e._fbq||(e._fbq=o),o.push=o,o.loaded=!0,o.version="2.0",o.queue=[],(a=t.createElement(n)).async=!0,a.src=c,(f=t.getElementsByTagName(n)[0]).parentNode.insertBefore(a,f))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js"),fbq("init","186030155234771"),fbq("track","PageView");
+});</script><script>_satellite["_runScript4"](function(event, target, Promise) {
+var _qevents=_qevents||[];!function(){var e=document.createElement("script");e.src=("https:"==document.location.protocol?"https://secure":"http://edge")+".quantserve.com/quant.js",e.async=!0,e.type="text/javascript";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}(),_qevents.push({qacct:"p-zfNtLVVEHXE-1",labels:" ",orderid:" ",revenue:" ",event:"refresh"});
+});</script><script>_satellite["_runScript5"](function(event, target, Promise) {
+var my_awesome_script=document.createElement("script");my_awesome_script.setAttribute("src","https://www.everestjs.net/static/le/last-event-tag-latest.min.js"),document.head.appendChild(my_awesome_script);var adCloudCheck=0,adCloudInterval=setInterval((function(){"undefined"!=typeof AdCloudEvent&&(AdCloudEvent("B1441C8B533095C00A490D4D@AdobeOrg","mathwgbl"),window.clearInterval(adCloudInterval)),5==++adCloudCheck&&window.clearInterval(adCloudInterval)}),200);
+});</script><script>_satellite["_runScript6"](function(event, target, Promise) {
+!function(e,t,n,i,a,c){e.twq||(i=e.twq=function(){i.exe?i.exe.apply(i,arguments):i.queue.push(arguments)},i.version="1.1",i.queue=[],(a=t.createElement(n)).async=!0,a.src="//static.ads-twitter.com/uwt.js",(c=t.getElementsByTagName(n)[0]).parentNode.insertBefore(a,c))}(window,document,"script"),twq("init","nyhmw"),twq("track","PageView");
+});</script><script>_satellite["_runScript7"](function(event, target, Promise) {
+var terminusLibrary=document.createElement("script");terminusLibrary.setAttribute("id","term-e7e5d07437489"),terminusLibrary.setAttribute("src","https://vidassets.terminus.services/a889772d-9ff6-4a01-b405-8c67866e57d4/t.js"),document.head.appendChild(terminusLibrary);
+});</script><script>_satellite["_runScript8"](function(event, target, Promise) {
+_linkedin_partner_id="34128",window._linkedin_data_partner_ids=window._linkedin_data_partner_ids||[],window._linkedin_data_partner_ids.push(_linkedin_partner_id),function(){var n=document.getElementsByTagName("script")[0],i=document.createElement("script");i.type="text/javascript",i.async=!0,i.src="https://snap.licdn.com/li.lms-analytics/insight.min.js",n.parentNode.insertBefore(i,n)}();
+});</script><script>_satellite["_runScript9"](function(event, target, Promise) {
+!function(e,t,n,c,p,a){e.qp||(c=e.qp=function(){c.qp?c.qp.apply(c,arguments):c.queue.push(arguments)},c.queue=[],(p=document.createElement(t)).async=!0,p.src=n,(a=document.getElementsByTagName(t)[0]).parentNode.insertBefore(p,a))}(window,"script","https://a.quora.com/qevents.js"),qp("init","804e7bec804c4c28b176de5e0395a246"),qp("track","ViewContent");
+});</script><iframe id="qualaroo_dnt_frame" src="./Control of an Inverted Pendulum on a Cart - MATLAB &amp; Simulink Example_files/frame.html" style="width: 1px; height: 1px; display: none; opacity: 0;"></iframe></body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
